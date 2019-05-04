@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TestMenu</string>
+    <string name="menu_top_bilds">Top\nсборки\nталантов</string>
+    <string name="menu_exit">Выход</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_wowtoken">WoWToken</string>
+    <string name="menu_character_profiles">Просмотр персонажей</string>
+    <string name="menu_talant_calc">Калькулятор талантов</string>
+    <string name="menu_auc">Аукцион</string>
+    <string name="menu_auc_tracking">Ваши предметы</string>
+    <string name="menu_auc_best">Сделки</string>
+</resources>
