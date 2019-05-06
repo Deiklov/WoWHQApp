@@ -1,1 +1,1 @@
-include ':Fragments', ':testmenu'
+include ':app'
