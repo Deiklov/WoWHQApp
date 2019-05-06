@@ -11,6 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".TalantsAndBuildsActivity">
+            <intent-filter>
+                <action android:name="LAUNCH_TALANTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SavedLots">
+            <intent-filter>
+                <action android:name="LAUNCH_SAVEDLOTS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SettingActivity">
+            <intent-filter>
+                <action android:name="LAUNCH_SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".WowTokenActivity">
             <intent-filter>
                 <action android:name="LAUNCH_WOWTOKEN" />
@@ -26,8 +47,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".MenuActivity">
+            android:name=".MenuActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

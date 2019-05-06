@@ -20,6 +20,7 @@
         android:text="@string/menu_auc_best"/>
 
     <TextView
+        android:id="@+id/menu_lots"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"
@@ -49,6 +50,7 @@
         android:textSize="20sp"
         android:text="@string/menu_auc"/>
     <TextView
+        android:id="@+id/menu_builds"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"
@@ -62,6 +64,7 @@
         android:text="@string/menu_top_bilds"/>
 
     <TextView
+        android:id="@+id/menu_calc"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"
@@ -89,6 +92,7 @@
         android:textSize="20sp"
         android:text="@string/menu_character_profiles"/>
     <TextView
+        android:id="@+id/menu_wowtoken"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"
@@ -101,6 +105,7 @@
         android:textSize="20sp"
         android:text="@string/menu_wowtoken"/>
     <TextView
+        android:id="@+id/menu_setting"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"
@@ -113,6 +118,7 @@
         android:textSize="20sp"
         android:text="@string/menu_settings"/>
     <TextView
+        android:id="@+id/menu_exit"
         android:height="0dp"
         android:width="0dp"
         android:gravity="center"

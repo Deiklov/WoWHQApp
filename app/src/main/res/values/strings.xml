@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestMenu</string>
+    <string name="app_name">WoWHQ</string>
     <string name="menu_top_bilds">Top\nсборки\nталантов</string>
     <string name="menu_exit">Выход</string>
     <string name="menu_settings">Настройки</string>
