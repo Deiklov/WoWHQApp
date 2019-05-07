@@ -1,4 +1,4 @@
-package com.example.wowhqapp.database.Interfaces;
+package com.example.wowhqapp.databases.entity;
 
 public interface IEntity {
     public int getId();

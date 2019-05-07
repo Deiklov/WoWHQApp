@@ -4,8 +4,8 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.wowhqapp.Model.Repository.SettingRepository;
-import com.example.wowhqapp.Presenter.SettingPresenter;
+import com.example.wowhqapp.repositories.SettingRepository;
+import com.example.wowhqapp.presenters.SettingPresenter;
 
 public class SettingActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.wowhqapp.Contract;
+package com.example.wowhqapp.contracts;
 
 public interface MainContract {
 

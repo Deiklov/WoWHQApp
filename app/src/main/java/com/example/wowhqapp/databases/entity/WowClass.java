@@ -1,7 +1,6 @@
-package com.example.wowhqapp.database.Entities;
+package com.example.wowhqapp.databases.entity;
 // package com.example;
 
-import com.example.wowhqapp.database.Interfaces.IEntity;
 import com.squareup.moshi.Json;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

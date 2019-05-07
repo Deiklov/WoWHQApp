@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.wowhqapp.Presenter.MenuPresenter;
-import com.example.wowhqapp.Contract.MainContract;
+import com.example.wowhqapp.presenters.MenuPresenter;
+import com.example.wowhqapp.contracts.MainContract;
 
 public class MenuActivity extends AppCompatActivity implements MainContract.MenuView {
 

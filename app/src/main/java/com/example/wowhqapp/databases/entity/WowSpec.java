@@ -1,4 +1,4 @@
-package com.example.wowhqapp.database.Entities;
+package com.example.wowhqapp.databases.entity;
 // package com.example;
 
 import android.arch.persistence.room.Entity;
@@ -8,7 +8,6 @@ import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.example.wowhqapp.database.Interfaces.IEntity;
 import com.squareup.moshi.Json;
 
 @Entity(

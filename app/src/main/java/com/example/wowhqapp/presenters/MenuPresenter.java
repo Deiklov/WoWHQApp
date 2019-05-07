@@ -1,6 +1,6 @@
-package com.example.wowhqapp.Presenter;
+package com.example.wowhqapp.presenters;
 
-import com.example.wowhqapp.Contract.MainContract;
+import com.example.wowhqapp.contracts.MainContract;
 
 public class MenuPresenter implements MainContract.MenuPresenter {
 

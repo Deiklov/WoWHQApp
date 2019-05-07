@@ -1,8 +1,8 @@
-package com.example.wowhqapp.Model.Repository;
+package com.example.wowhqapp.repositories;
 
 import android.content.SharedPreferences;
 
-import com.example.wowhqapp.Contract.MainContract;
+import com.example.wowhqapp.contracts.MainContract;
 
 public class SettingRepository implements MainContract.SettingRepository {
 

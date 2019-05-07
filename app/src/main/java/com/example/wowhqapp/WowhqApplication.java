@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.example.wowhqapp.database.Databases.TalentsCalculatorDatabase;
+import com.example.wowhqapp.databases.database.TalentsCalculatorDatabase;
 
 public class WowhqApplication extends Application {
     private TalentsCalculatorDatabase mTalentCalcDb;
