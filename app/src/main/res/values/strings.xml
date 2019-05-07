@@ -9,4 +9,12 @@
     <string name="menu_auc">Аукцион</string>
     <string name="menu_auc_tracking">Ваши предметы</string>
     <string name="menu_auc_best">Сделки</string>
+    <string name="setting_title">Настройки</string>
+    <string-array name="regions">
+        <item>ru</item>
+        <item>en</item>
+        <item>es</item>
+        <item>de</item>
+        <item>fr</item>
+    </string-array>
 </resources>

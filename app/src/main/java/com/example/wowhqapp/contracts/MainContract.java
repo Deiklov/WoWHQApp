@@ -35,5 +35,9 @@ public interface MainContract {
         void setSlug(String value);
         void setRegion(String value);
         void setLang(String value);
+        void MenuItemSelected();
+    }
+    interface SettingView{
+        void CloseSetting();
     }
 }
