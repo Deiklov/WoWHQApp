@@ -13,6 +13,7 @@
     <string name="setting_server">Имя сервера</string>
     <string name="setting_lang">Язык</string>
     <string name="setting_region">Регион</string>
+    <string name="auctions_title">Аукционы</string>
     <string-array name="langs">
         <item>ru</item>
         <item>en</item>
@@ -23,6 +24,10 @@
     <string-array name="regions">
         <item>us</item>
         <item>eu</item>
+    </string-array>
+    <string-array name="auction_title">
+        <item>Сделки</item>
+        <item>Аукцион</item>
     </string-array>
     <string-array name="slugs">
         <item>aegwynn</item>
@@ -756,4 +761,7 @@
         <item>zuljin</item>
         <item>zuluhed</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

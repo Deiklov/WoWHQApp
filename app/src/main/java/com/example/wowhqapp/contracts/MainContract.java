@@ -42,4 +42,13 @@ public interface MainContract {
         void SetSpinnerValues(String slug, String region, String lang);
         void CloseSetting();
     }
+    interface AuctionsPresenter{
+        void init(Boolean type, String[] titles);
+        void MenuItemSelected();
+    }
+    interface AuctionsView{
+        void closeAuctions();
+        void setTitle(String txt);
+        void setFragment(Boolean type);
+    }
 }

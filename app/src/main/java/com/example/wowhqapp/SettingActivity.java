@@ -49,7 +49,6 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
         mSettingPresenter = new SettingPresenter(new SettingRepository(getSharedPreferences(SettingRepository.APP_PREFERENCES, Context.MODE_PRIVATE)), this);
 
         mRegionSpinner = (Spinner) findViewById(R.id.setting_spin_region);
-        mRegionSpinner.setSelection(1);
         mSlugSpinner = (Spinner) findViewById(R.id.setting_spin_server);
         mLangSpinner = (Spinner) findViewById(R.id.setting_spin_lang);
         mToolbar = (Toolbar) findViewById(R.id.setting_toolbar);

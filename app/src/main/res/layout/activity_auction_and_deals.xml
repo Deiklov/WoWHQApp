@@ -3,10 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <TextView
-        android:id="@+id/txtView"
-        android:layout_centerInParent="true"
-        android:background="#CDDC39"
-        android:layout_width="150dp"
-        android:layout_height="120dp" />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/auctions_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Toolbar">
+    </android.support.v7.widget.Toolbar>
+    <FrameLayout
+        android:id="@+id/auctions_frame_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

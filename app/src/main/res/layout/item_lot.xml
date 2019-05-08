@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A CardView that contains a TextView -->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:padding="10dp"
+    android:layout_margin="4dp"
+    card_view:cardCornerRadius="4dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:id="@+id/lot_icon"
+            android:src="@drawable/inv_crate_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/lot_time"
+            app:layout_constraintBaseline_toBaselineOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/lot_name"/>
+
+        <TextView
+            android:id="@+id/lot_owner"
+            android:background="@color/colorItemEl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Name"
+            app:layout_constraintEnd_toStartOf="@id/lot_buyout"
+            app:layout_constraintBaseline_toBaselineOf="@id/lot_time" />
+
+        <TextView
+            android:id="@+id/lot_buyout"
+            android:background="@color/colorItemEl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="9999999"
+            app:layout_constraintEnd_toStartOf="@id/lot_bid"
+            app:layout_constraintBaseline_toBaselineOf="@id/lot_time" />
+
+        <TextView
+            android:id="@+id/lot_time"
+            android:background="@color/colorItemEl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="LONG"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lot_bid"
+            android:background="@color/colorItemEl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:text="1112223"
+            app:layout_constraintEnd_toStartOf="@id/lot_time"
+            app:layout_constraintBaseline_toBaselineOf="@id/lot_time" />
+
+        <TextView
+            android:id="@+id/lot_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:letterSpacing="-0.02"
+            android:paddingLeft="55dp"
+
+            android:lineSpacingExtra="5sp"
+            tools:text="Axe of bla bla"
+            android:textColor="@color/navy"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/lot_buyout"
+            app:layout_constraintTop_toBottomOf="@+id/lot_time" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
