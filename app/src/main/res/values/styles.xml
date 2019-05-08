@@ -8,4 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item> <!-- Таким синтаксисом мы можем получить доступ к значению высоты, которая применяется в атрибутах темы. По умолчанию, если мы не переопределяем значение, оно берётся из системного пакета темы -->
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>

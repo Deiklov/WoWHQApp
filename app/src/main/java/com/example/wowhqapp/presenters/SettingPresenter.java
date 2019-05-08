@@ -8,17 +8,18 @@ public class SettingPresenter implements MainContract.SettingPresenter {
 
     private SettingRepository mSettingRepository;
     private MainContract.MenuView mMenuView;
+    private MainContract.SettingView mSettingView;
 
-    public SettingPresenter(SettingRepository repository){
+    public SettingPresenter(SettingRepository repository, MainContract.SettingView settingView){
         mSettingRepository = repository;
-        mMenuView = new MenuActivity();
+        mSettingView = settingView;
     }
 
     @Override
     public String getSlug() {
         String slug = mSettingRepository.getSlug();
         if (slug == "no slug"){
-            mMenuView.openSettingActivity();
+            return null;
         }
         return slug;
     }
@@ -27,7 +28,7 @@ public class SettingPresenter implements MainContract.SettingPresenter {
     public String getRegion() {
         String region = mSettingRepository.getRegion();
         if (region == "no region"){
-            mMenuView.openSettingActivity();
+            return null;
         }
         return region;
     }
@@ -36,9 +37,14 @@ public class SettingPresenter implements MainContract.SettingPresenter {
     public String getLang() {
         String lang = mSettingRepository.getLang();
         if (lang == "no lang"){
-            mMenuView.openSettingActivity();
+            return null;
         }
         return lang;
+    }
+
+    @Override
+    public void init() {
+        mSettingView.SetSpinnerValues(getSlug(), getRegion(), getLang());
     }
 
     @Override
@@ -54,6 +60,11 @@ public class SettingPresenter implements MainContract.SettingPresenter {
     @Override
     public void setLang(String value) {
         mSettingRepository.setLang(value);
+    }
+
+    @Override
+    public void MenuItemSelected() {
+        mSettingView.CloseSetting();
     }
 
 }
