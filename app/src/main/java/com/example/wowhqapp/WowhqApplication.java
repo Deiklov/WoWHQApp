@@ -5,15 +5,16 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.example.wowhqapp.databases.database.TalentsCalculatorDatabase;
+import com.example.wowhqapp.network.ApiTalentsRepository;
 
 public class WowhqApplication extends Application {
     private TalentsCalculatorDatabase mTalentCalcDb;
-    // private ApiRepo mApiRepo;
+    private ApiTalentsRepository mApiTalentsRepo;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        // mApiRepo = new ApiRepo();
+        mApiTalentsRepo = new ApiTalentsRepository();
         mTalentCalcDb = Room.databaseBuilder(
                 this,
                 TalentsCalculatorDatabase.class,
@@ -26,9 +27,9 @@ public class WowhqApplication extends Application {
         return mTalentCalcDb;
     }
 
-    // public ApiRepo getApis() {
-    //     return mApiRepo;
-    // }
+    public ApiTalentsRepository getTalentsApi() {
+        return mApiTalentsRepo;
+    }
 
     public static WowhqApplication from(Context context) {
         return (WowhqApplication) context.getApplicationContext();
