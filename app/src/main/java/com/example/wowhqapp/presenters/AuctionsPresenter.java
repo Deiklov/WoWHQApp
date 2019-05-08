@@ -18,7 +18,7 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
     public void init(Boolean type, String[] titles) {
         mTypeOfActivity = type;
         mAuctionsView.setTitle(mTypeOfActivity ? titles[0] : titles[1] + " - " + mSettingRepository.getSlug());
-        mAuctionsView.setFragment(type);
+//        mAuctionsView.setFragment(type);
     }
 
     @Override

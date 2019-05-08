@@ -764,4 +764,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="token_title">Текущая цена</string>
+    <string name="token_current">Текущая цена:</string>
+    <string name="token_max">Max:</string>
+    <string name="token_min">Min:</string>
+    <string name="token_start">Сканировать в фоне</string>
 </resources>

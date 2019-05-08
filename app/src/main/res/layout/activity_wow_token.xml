@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".WowTokenActivity">
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/token_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/token_max" />
+        <TextView
+            android:id="@+id/token_current"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/token_current" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/token_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/token_min" />
+        <CheckBox
+            android:id="@+id/token_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/token_start"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

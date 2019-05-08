@@ -12,6 +12,8 @@ public class SettingRepository implements MainContract.SettingRepository {
     public static final String SLUG = "Slug";
     public static final String REGION = "Region";
     public static final String LANG = "Language";
+    public static final String WoWTokenServiceEnable = "WoWTokenServiceEnable";
+
 
 
 
@@ -36,6 +38,17 @@ public class SettingRepository implements MainContract.SettingRepository {
     public String getLang() {
         String value = mPreferences.getString(LANG, "no lang");
         return value;
+    }
+
+    @Override
+    public Boolean getWoWTokenServiceEnable() {
+        Boolean value = mPreferences.getBoolean(WoWTokenServiceEnable, false);
+        return value;
+    }
+
+    @Override
+    public void setWoWTokenServiceEnable(Boolean val) {
+        mEditor.putBoolean(WoWTokenServiceEnable, val);
     }
 
     @Override
