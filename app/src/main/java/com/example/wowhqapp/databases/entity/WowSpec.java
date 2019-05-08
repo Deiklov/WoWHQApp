@@ -15,21 +15,23 @@ import com.squareup.moshi.Json;
                 @Index(value = {"classId"})
         },
         foreignKeys = @ForeignKey(
-            entity = WowClass.class,
-            parentColumns = "id",
-            childColumns = "classId"
+                entity = WowClass.class,
+                parentColumns = "id",
+                childColumns = "classId"
         )
 )
 public class WowSpec implements IEntity {
-    @NonNull
+    @Json(name = "class_id")
+    private int classId;
     @PrimaryKey
     @Json(name = "id")
     private int id;
+    @Json(name = "spec_order")
+    private int specOrder;
     @NonNull
-    @Json(name = "class_id")
-    private int classId;
     @Json(name = "name")
     private String name;
+    @NonNull
     @Json(name = "description")
     private String description;
     @Json(name = "icon")
@@ -37,52 +39,69 @@ public class WowSpec implements IEntity {
 
     /**
      * No args constructor for use in serialization
-     * 
      */
     public WowSpec() {
     }
 
     /**
-     * 
+     *
+     * @param id
      * @param icon
      * @param classId
      * @param description
      * @param name
-     * @param id
+     * @param specOrder
      */
     @Ignore
-    public WowSpec(int classId, int id, String name, String description, String icon) {
+    public WowSpec(int classId, int id, int specOrder, @NonNull String name, @NonNull String description, String icon) {
         super();
         this.classId = classId;
         this.id = id;
+        this.specOrder = specOrder;
         this.name = name;
         this.description = description;
         this.icon = icon;
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int specId) { this.id = specId; }
+    public void setId(int specId) {
+        this.id = specId;
+    }
 
-    public int getClassId() { return classId; }
+    public int getSpecOrder() {
+        return specOrder;
+    }
 
-    public void setClassId(int classId) { this.classId = classId; }
+    public void setSpecOrder(int specOrder) {
+        this.specOrder = specOrder;
+    }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         this.description = description;
     }
 
