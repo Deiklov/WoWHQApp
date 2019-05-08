@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.example.wowhqapp.databases.database.TalentsCalculatorDatabase;
 import com.example.wowhqapp.databases.database.AucAndTokenDataBase;
+import com.example.wowhqapp.network.ApiTalentsRepository;
 
 public class WowhqApplication extends Application {
 
@@ -14,7 +15,7 @@ public class WowhqApplication extends Application {
     public static WowhqApplication instance;
     private AucAndTokenDataBase mAucAndTokenDataBase;
     private TalentsCalculatorDatabase mTalentCalcDb;
-    // private ApiRepo mApiRepo;
+    private ApiTalentsRepository mApiTalentsRepo;
 
     @Override
     public void onCreate() {
@@ -25,6 +26,7 @@ public class WowhqApplication extends Application {
                 .fallbackToDestructiveMigration()
                 .build();
         // mApiRepo = new ApiRepo();
+        mApiTalentsRepo = new ApiTalentsRepository();
         mTalentCalcDb = Room.databaseBuilder(
                 this,
                 TalentsCalculatorDatabase.class,
@@ -41,9 +43,9 @@ public class WowhqApplication extends Application {
         return  mAucAndTokenDataBase;
     }
 
-    // public ApiRepo getApis() {
-    //     return mApiRepo;
-    // }
+    public ApiTalentsRepository getTalentsApi() {
+        return mApiTalentsRepo;
+    }
 
     public static WowhqApplication from(Context context) {
         return (WowhqApplication) context.getApplicationContext();

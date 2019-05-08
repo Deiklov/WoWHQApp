@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bfb99edc8055ef728fa84d0cb3a16d58",
+    "identityHash": "734f980305c771513bf0dc220e96d195",
     "entities": [
       {
         "tableName": "WowClass",
@@ -32,8 +32,14 @@
       },
       {
         "tableName": "WowSpec",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `classId` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`classId`) REFERENCES `WowClass`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`classId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `specOrder` INTEGER NOT NULL, `name` TEXT NOT NULL, `description` TEXT NOT NULL, `icon` TEXT, PRIMARY KEY(`id`), FOREIGN KEY(`classId`) REFERENCES `WowClass`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
+          {
+            "fieldPath": "classId",
+            "columnName": "classId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
           {
             "fieldPath": "id",
             "columnName": "id",
@@ -41,8 +47,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "classId",
-            "columnName": "classId",
+            "fieldPath": "specOrder",
+            "columnName": "specOrder",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -193,7 +199,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"bfb99edc8055ef728fa84d0cb3a16d58\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"734f980305c771513bf0dc220e96d195\")"
     ]
   }
 }
