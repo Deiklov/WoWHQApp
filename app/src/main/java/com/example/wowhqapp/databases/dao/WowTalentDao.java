@@ -7,50 +7,50 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.wowhqapp.databases.entity.WowClass;
+import com.example.wowhqapp.databases.entity.Talent;
 import com.example.wowhqapp.databases.entity.WowSpec;
 
 import java.util.List;
 
 @Dao
-public interface WowSpecDao {
+public interface WowTalentDao {
     // -------Get--------------------
-    @Query("SELECT * FROM wowspec WHERE id=:id")
-    WowSpec getById(int id);
+    @Query("SELECT * FROM talent WHERE id=:id")
+    Talent getById(int id);
 
-    @Query("SELECT * FROM wowclass WHERE id=:classId")
-    WowClass getClass(int classId);
+    @Query("SELECT * FROM wowspec WHERE id=:specId")
+    WowSpec getSpec(int specId);
 
-    @Query("SELECT * FROM wowspec WHERE classId=:classId")
-    List<WowSpec> getByClassId(int classId);
+    @Query("SELECT * FROM talent WHERE specId=:specId")
+    List<Talent> getBySpecId(int specId);
 
 
     //-------Insert------------------
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(WowSpec... wowSpecs);
+    void insert(Talent... talents);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Iterable<WowSpec> wowSpecs);
+    void insert(Iterable<Talent> talents);
 
 
     // -------Update-----------------
     @Update
-    void update(WowSpec... wowSpecs);
+    void update(Talent... talents);
 
     @Update
-    void update(Iterable<WowSpec> wowSpecs);
+    void update(Iterable<Talent> talents);
 
 
     // -------Delete-----------------
     @Delete
-    void delete(WowSpec... wowSpecs);
+    void delete(Talent... talents);
 
     @Delete
-    void delete(Iterable<WowSpec> wowSpecs);
+    void delete(Iterable<Talent> talents);
 
-    @Query("DELETE FROM wowspec WHERE id=:id")
+    @Query("DELETE FROM talent WHERE id=:id")
     void deleteById(int id);
 
-    @Query("DELETE FROM wowspec")
+    @Query("DELETE FROM talent")
     void deleteAll();
 }

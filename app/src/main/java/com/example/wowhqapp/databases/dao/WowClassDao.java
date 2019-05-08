@@ -13,12 +13,10 @@ import com.example.wowhqapp.databases.entity.WowClass;
 @Dao
 public interface WowClassDao {
     // -------Get--------------------
-
     @Query("SELECT * FROM wowclass WHERE id=:id")
     WowClass getById(int id);
 
     //-------Insert------------------
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(WowClass... wowClasses);
 
@@ -27,14 +25,19 @@ public interface WowClassDao {
 
 
     // -------Update-----------------
-
     @Update
     void update(WowClass... wowClasses);
+
+    @Update
+    void  update(Iterable<WowClass> wowClasses);
 
 
     // -------Delete-----------------
     @Delete
     void delete(WowClass... wowClasses);
+
+    @Delete
+    void delete(Iterable<WowClass> wowClasses);
 
     @Query("DELETE FROM wowclass WHERE id=:id")
     void deleteById(int id);
