@@ -32,12 +32,14 @@ public interface MainContract {
         String getSlug();
         String getRegion();
         String getLang();
+        void init();
         void setSlug(String value);
         void setRegion(String value);
         void setLang(String value);
         void MenuItemSelected();
     }
     interface SettingView{
+        void SetSpinnerValues(String slug, String region, String lang);
         void CloseSetting();
     }
 }
