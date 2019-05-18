@@ -16,7 +16,7 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
 
     @Override
     public void init() {
-        mWoWTokenView.setPrice();
+       //mWoWTokenView.setPrice();
     }
 
     @Override

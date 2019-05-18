@@ -19,6 +19,10 @@ import com.example.wowhqapp.presenters.SettingPresenter;
 import com.example.wowhqapp.repositories.SettingRepository;
 import com.example.wowhqapp.presenters.SettingPresenter;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
+
 public class SettingActivity extends AppCompatActivity implements MainContract.SettingView {
 
     private SettingPresenter mSettingPresenter;
@@ -95,14 +99,10 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
 
     @Override
     public void SetSpinnerValues(String slug, String region, String lang) {
-        ArrayAdapter regionSpinnerAdapter =  (ArrayAdapter) mRegionSpinner.getAdapter();
-        mRegionSpinner.setSelection(regionSpinnerAdapter.getPosition(region));
 
-        ArrayAdapter slugSpinnerAdapter =  (ArrayAdapter) mSlugSpinner.getAdapter();
-        mSlugSpinner.setSelection(slugSpinnerAdapter.getPosition(slug));
-
-        ArrayAdapter langSpinnerAdapter =  (ArrayAdapter) mLangSpinner.getAdapter();
-        mLangSpinner.setSelection(langSpinnerAdapter.getPosition(lang));
+        mRegionSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.regions)).indexOf(region));
+        mSlugSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.slugs)).indexOf(slug));
+        mLangSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.langs)).indexOf(lang));
 
     }
 
