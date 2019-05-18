@@ -15,13 +15,16 @@ import java.util.List;
 @Dao
 public interface WowSpecDao {
     // -------Get--------------------
+    @Query("SELECT * FROM wowspec")
+    List<WowSpec> getAll();
+
     @Query("SELECT * FROM wowspec WHERE id=:id")
     WowSpec getById(int id);
 
     @Query("SELECT * FROM wowclass WHERE id=:classId")
     WowClass getClass(int classId);
 
-    @Query("SELECT * FROM wowspec WHERE classId=:classId")
+    @Query("SELECT * FROM wowspec WHERE classId=:classId ORDER BY specOrder ASC")
     List<WowSpec> getByClassId(int classId);
 
 

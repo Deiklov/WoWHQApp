@@ -20,6 +20,7 @@ public class WowhqApplication extends Application {
                 TalentsCalculatorDatabase.class,
                 "talents_calculator_database")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries() // TODO !!!
                 .build();
     }
 

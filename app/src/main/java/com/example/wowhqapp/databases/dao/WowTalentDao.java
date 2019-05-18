@@ -15,6 +15,9 @@ import java.util.List;
 @Dao
 public interface WowTalentDao {
     // -------Get--------------------
+    @Query("SELECT * FROM talent")
+    List<Talent> getAll();
+
     @Query("SELECT * FROM talent WHERE id=:id")
     Talent getById(int id);
 

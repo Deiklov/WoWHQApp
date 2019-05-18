@@ -34,19 +34,23 @@ public class WowClass implements IEntity {
         this.name = name;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
     @NonNull
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(@NonNull String name) {
         this.name = name;
     }

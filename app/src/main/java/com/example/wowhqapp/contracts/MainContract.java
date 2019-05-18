@@ -22,11 +22,20 @@ public interface MainContract {
     }
     interface SettingRepository{
         String getSlug();
-        String getRegion();
-        String getLang();
         void setSlug(String value);
+        String getRegion();
         void setRegion(String value);
+        String getLang();
         void setLang(String value);
+
+        String getTalentsLang();
+        void setTalentsLang(String value);
+        int getTalentsWowClassId();
+        void setTalentsWowClassId(int wowClassId);
+        int getTalentsWowSpecId();
+        void setTalentsWowSpecId(int wowSpecId);
+        int getTalentsWowSpecOrder();
+        void setTalentsWowSpecOrder(int wowSpecOrder);
     }
     interface SettingPresenter{
         String getSlug();

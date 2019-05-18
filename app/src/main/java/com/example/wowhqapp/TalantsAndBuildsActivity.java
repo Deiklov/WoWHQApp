@@ -11,6 +11,6 @@ public class TalantsAndBuildsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_talants_and_builds);
-        TYPE = getIntent().getExtras().getBoolean(MenuActivity.KEY_TYPE) ? "Сборки талантов" : "Таблица талантов";
+        TYPE = getIntent().getExtras().getBoolean(MenuActivity.KEY_TYPE) ? "Таблица талантов" : "Сборки талантов";
     }
 }

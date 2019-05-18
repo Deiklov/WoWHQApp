@@ -71,10 +71,12 @@ public class WowSpec implements IEntity {
         this.classId = classId;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int specId) {
         this.id = specId;
     }
@@ -88,10 +90,12 @@ public class WowSpec implements IEntity {
     }
 
     @NonNull
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(@NonNull String name) {
         this.name = name;
     }

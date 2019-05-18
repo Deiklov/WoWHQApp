@@ -81,10 +81,12 @@ public class Talent implements IEntity {
         this.col = col;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -98,10 +100,12 @@ public class Talent implements IEntity {
     }
 
     @NonNull
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(@NonNull String name) {
         this.name = name;
     }

@@ -9,10 +9,15 @@ import android.arch.persistence.room.Update;
 
 import com.example.wowhqapp.databases.entity.WowClass;
 
+import java.util.List;
+
 
 @Dao
 public interface WowClassDao {
     // -------Get--------------------
+    @Query("SELECT * FROM wowclass")
+    List<WowClass> getAll();
+
     @Query("SELECT * FROM wowclass WHERE id=:id")
     WowClass getById(int id);
 
