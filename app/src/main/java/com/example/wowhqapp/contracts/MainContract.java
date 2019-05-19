@@ -53,19 +53,25 @@ public interface MainContract {
         void setTitle(String txt);
         void setFragment(Boolean type);
     }
+
+    //WoWToken
     interface WoWTokenView{
-        void setPrice(int min, int max, int current);
+        void setPrice(long min, long max, long current);
         void setBox(Boolean val);
     }
     interface WoWTokenPresenter{
         void init();
+        void test_updateToken(int coef);
         void setServiceStatus(Boolean val);
+        void destroy();
     }
     interface TokenRepository{
-        void setMinMaxCurrent();
-        int getMax(String region);
-        int getMin(String region);
-        int getCurrent(String region);
+        void refreshMinMaxCurrent();
+        void test_insertToken(int coef);
+        long getMax();
+        long getMin();
+        long getCurrent();
+        void destroy();
 
     }
 

@@ -30,7 +30,7 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public String getRegion() {
-        String value = mPreferences.getString(REGION, "no region");
+        String value = mPreferences.getString(REGION, "eu");
         return value;
     }
 
