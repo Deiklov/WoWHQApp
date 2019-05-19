@@ -768,5 +768,9 @@
     <string name="token_current">Текущая цена:</string>
     <string name="token_max">Max:</string>
     <string name="token_min">Min:</string>
-    <string name="token_start">Сканировать в фоне</string>
+    <string name="token_start">Оповестить, если цена..</string>
+    <string name="token_change">Изменения:</string>
+    <string name="token_rbtn_low">..меньше:</string>
+    <string name="token_rbtn_high">..больше:</string>
+    <string name="token_input_error">Проверьте правильность ввода ;)</string>
 </resources>

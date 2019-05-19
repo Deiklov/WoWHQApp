@@ -25,6 +25,10 @@ public interface MainContract {
         String getRegion();
         String getLang();
         Boolean getWoWTokenServiceEnable();
+        Boolean getTargetPriceSig();
+        long getTargetPrice();
+        void setTargetPrice(long val);
+        void setTargetPriceSig(Boolean val);
         void setWoWTokenServiceEnable(Boolean val);
         void setSlug(String value);
         void setRegion(String value);
@@ -56,13 +60,17 @@ public interface MainContract {
 
     //WoWToken
     interface WoWTokenView{
-        void setPrice(long min, long max, long current);
+        void setPrice(long min, long max, long current, long lastChange, int icon);
         void setBox(Boolean val);
+        void setRadioBtn(Boolean val);
+        void setTargetPriceEditText(long price);
     }
     interface WoWTokenPresenter{
-        void init();
+        void init_price();
+        void init_traget_price();
         void test_updateToken(int coef);
         void setServiceStatus(Boolean val);
+        void setTargetPrice(Boolean val, long price);
         void destroy();
     }
     interface TokenRepository{
@@ -71,7 +79,9 @@ public interface MainContract {
         long getMax();
         long getMin();
         long getCurrent();
+        long getlastChange();
         void destroy();
+
 
     }
 

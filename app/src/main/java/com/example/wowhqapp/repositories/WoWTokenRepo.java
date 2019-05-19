@@ -39,7 +39,7 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
                         if (woWToken.isEmpty()){mWoWToken = null; Log.v("REPO_TOKEN", "Получили нулевой токен");}
                         else {
                             mWoWToken = woWToken.get(0);
-                            mWoWTokenPresenter.init();
+                            mWoWTokenPresenter.init_price();
                             Log.v("REPO_TOKEN", "Получили НЕ нулевой токен");
                         }
                     }
@@ -74,6 +74,11 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
     @Override
     public long getCurrent() {
         return mWoWToken.getCurrentPriceBlizzardApi();
+    }
+
+    @Override
+    public long getlastChange() {
+        return mWoWToken.getLastChange();
     }
 
     @Override

@@ -17,9 +17,16 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
     }
 
     @Override
-    public void init() {
-        mWoWTokenView.setPrice(mTokenRepository.getMin(), mTokenRepository.getMax(), mTokenRepository.getCurrent());
-       //mWoWTokenView.setPrice();
+    public void init_price() {
+        mWoWTokenView.setPrice(mTokenRepository.getMin(), mTokenRepository.getMax(), mTokenRepository.getCurrent(),
+                mTokenRepository.getlastChange(), (mTokenRepository.getlastChange() > 0) ? 0 : 1);
+    }
+
+    @Override
+    public void init_traget_price() {
+        mWoWTokenView.setBox(mSettingRepository.getWoWTokenServiceEnable());
+        mWoWTokenView.setRadioBtn(mSettingRepository.getTargetPriceSig());
+        mWoWTokenView.setTargetPriceEditText(mSettingRepository.getTargetPrice());
     }
 
     @Override
@@ -30,7 +37,13 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
 
     @Override
     public void setServiceStatus(Boolean val) {
+        mSettingRepository.setWoWTokenServiceEnable(val);
+    }
 
+    @Override
+    public void setTargetPrice(Boolean val, long price) {
+        mSettingRepository.setTargetPrice(price);
+        mSettingRepository.setTargetPriceSig(val);
     }
 
     @Override

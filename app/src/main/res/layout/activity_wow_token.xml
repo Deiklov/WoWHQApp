@@ -23,14 +23,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/token_min" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/token_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/token_change" />
+            <ImageSwitcher
+                android:id="@+id/token_image_switcher"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </ImageSwitcher>
+        </LinearLayout>
         <CheckBox
             android:id="@+id/token_start"
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/token_start"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/token_rbtn_low"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/token_rbtn_low"/>
+            <RadioButton
+                android:id="@+id/token_rbtn_high"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/token_rbtn_high"/>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/token_et_target_price"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:width="70dp"
+            android:inputType="number"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <!--Тестовый блок-->
         <EditText
+            android:visibility="invisible"
             android:id="@+id/test_coef_et"
             android:text="125"
             android:layout_width="wrap_content"
@@ -45,6 +90,8 @@
             android:text="presente.init"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <!--Конец-->
+
 
     </LinearLayout>
 
