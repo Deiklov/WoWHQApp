@@ -60,14 +60,16 @@ public interface MainContract {
 
     //WoWToken
     interface WoWTokenView{
+        void startService();
+        void stopService();
         void setPrice(long min, long max, long current, long lastChange, int icon);
         void setBox(Boolean val);
         void setRadioBtn(Boolean val);
         void setTargetPriceEditText(long price);
     }
     interface WoWTokenPresenter{
-        void init_price();
-        void init_traget_price();
+        void initPrice();
+        void initTargetPriceAndStartService();
         void test_updateToken(int coef);
         void setServiceStatus(Boolean val);
         void setTargetPrice(Boolean val, long price);
@@ -81,8 +83,15 @@ public interface MainContract {
         long getCurrent();
         long getlastChange();
         void destroy();
-
-
+    }
+    interface WoWTokenServicePresenter{
+        void init(boolean is_from_activity);
+    }
+    interface WoWTokenServiceView{
+        void makeNotification(long current_price);
+    }
+    interface TokenServiceRepository{
+        long saveWoWTokenAndGetCurrentPrice();
     }
 
 }

@@ -39,7 +39,7 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
                         if (woWToken.isEmpty()){mWoWToken = null; Log.v("REPO_TOKEN", "Получили нулевой токен");}
                         else {
                             mWoWToken = woWToken.get(0);
-                            mWoWTokenPresenter.init_price();
+                            mWoWTokenPresenter.initPrice();
                             Log.v("REPO_TOKEN", "Получили НЕ нулевой токен");
                         }
                     }

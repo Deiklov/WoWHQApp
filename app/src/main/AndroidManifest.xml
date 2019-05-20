@@ -12,9 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <receiver android:name=".BroadcastReceiverTokenService">
+            <intent-filter >
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
         <service
             android:name=".WoWTokenService"
-            android:exported="false"></service>
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="${applicationId}_START"/>
+                <action android:name="${applicationId}_STOP"/>
+            </intent-filter>
+        </service>
 
         <activity android:name=".TalantsAndBuildsActivity">
             <intent-filter>

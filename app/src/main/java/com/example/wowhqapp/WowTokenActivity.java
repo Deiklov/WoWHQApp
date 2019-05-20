@@ -1,6 +1,7 @@
 package com.example.wowhqapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -57,13 +58,13 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
             @Override
             public void onClick(View v) {
                 mWoWTokenPresenter.test_updateToken(Integer.parseInt(mTestEditTExt.getText().toString()));
-                //mWoWTokenPresenter.init_price();
+                //mWoWTokenPresenter.initPrice();
             }
         });
         mTestBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWoWTokenPresenter.init_price();
+                mWoWTokenPresenter.initPrice();
             }
         });
 
@@ -87,7 +88,7 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
         mArrowSwitcher.setInAnimation(inAnimation);
         mArrowSwitcher.setOutAnimation(outAnimation);
 
-        mWoWTokenPresenter.init_traget_price();
+        mWoWTokenPresenter.initTargetPriceAndStartService();
 
 
         final Handler handler = new Handler();
@@ -95,7 +96,7 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-                //mWoWTokenPresenter.init_price();
+                //mWoWTokenPresenter.initPrice();
 
             }
         }, 3000);
@@ -168,6 +169,26 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
         super.onDestroy();
         Log.v("REPO_TOKEN", "destroy");
         mWoWTokenPresenter.destroy();
+    }
+
+    @Override
+    public void startService() {
+        Log.v("REPO_TOKEN", "Начало старт сервис");
+
+        Intent intent = new Intent(WoWTokenService.ACTION_START);
+        intent.putExtra(WoWTokenService.IS_FROM_ACTICITY, true);
+        stopService(intent); //На всякий...
+        Log.v("REPO_TOKEN", "stopService отработал");
+
+        startService(intent);
+        Log.v("REPO_TOKEN", "Конец старт сервис");
+
+    }
+
+    @Override
+    public void stopService() {
+        Intent intent = new Intent(WoWTokenService.ACTION_STOP);
+        stopService(intent);
     }
 
     @Override
