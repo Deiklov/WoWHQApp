@@ -13,6 +13,9 @@
     <string name="setting_server">Имя сервера</string>
     <string name="setting_lang">Язык</string>
     <string name="setting_region">Регион</string>
+    <string name="talents_a_bar_title_text">Таланты</string>
+    <string name="set_this_text_from_resource">Set this text from resource</string>
+    <string name="talents_button_reset_text">Сбросить выбор</string>
     <string-array name="langs">
         <item>ru</item>
         <item>en</item>

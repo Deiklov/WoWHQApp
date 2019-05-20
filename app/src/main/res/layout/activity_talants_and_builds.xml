@@ -16,6 +16,12 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <Button
+        android:id="@+id/talents_button_reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/talents_button_reset_text" />
+
     <FrameLayout
         android:id="@+id/fragment_talents"
         android:layout_width="wrap_content"

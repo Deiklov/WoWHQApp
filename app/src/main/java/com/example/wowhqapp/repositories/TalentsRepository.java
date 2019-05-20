@@ -35,7 +35,7 @@ public class TalentsRepository implements TalentsContract.TalentsRepository {
     private final WowTalentDao mWowTalentDao;
 
 
-    TalentsRepository(Context context, @NonNull MainContract.SettingRepository settingRepository) {
+    public TalentsRepository(Context context, @NonNull MainContract.SettingRepository settingRepository) {
         mContext = context;
         mSettingRepository = settingRepository;
         ApiTalentsRepository apiTalentsRepository = ApiTalentsRepository.from(mContext);

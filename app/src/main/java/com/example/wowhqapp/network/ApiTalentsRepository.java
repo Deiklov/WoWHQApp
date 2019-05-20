@@ -24,7 +24,7 @@ public class ApiTalentsRepository {
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create())
                 .baseUrl(
-                        new HttpUrl.Builder().scheme("https")
+                        new HttpUrl.Builder().scheme("http")
                                 .host("3.121.42.184")
                                 .build()
                 ).client(mOkHttpClient)
