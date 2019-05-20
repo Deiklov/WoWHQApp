@@ -44,6 +44,13 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
     private Button mTestBtn;
     private Button mTestBtn2;
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.v("REPO_TOKEN", "Resume");
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +71,6 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
         mTestBtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWoWTokenPresenter.initPrice();
             }
         });
 
@@ -106,22 +112,21 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
             public void onClick(View v) {
                 CheckBox checkBox = (CheckBox) v;
                 mWoWTokenPresenter.setServiceStatus(checkBox.isChecked());
-                Log.v("REPO_TOKEN", "Обрабатываем нажатие на чекбокс");
             }
         });
 
         mLowRadioButton.setOnClickListener(radioButtonClickListener);
         mHighRadioButton.setOnClickListener(radioButtonClickListener);
 
-        mTargetPriceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus){
-                    Log.v("REPO_TOKEN", "Фокус изменился");
-                    mWoWTokenPresenter.setTargetPrice(mHighRadioButton.isChecked(), Long.parseLong(mTargetPriceEditText.getText().toString()));
-                }
-            }
-        });
+//        mTargetPriceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (!hasFocus){
+//                    Log.v("REPO_TOKEN", "Фокус изменился");
+//                    mWoWTokenPresenter.setTargetPrice(mHighRadioButton.isChecked(), Long.parseLong(mTargetPriceEditText.getText().toString()));
+//                }
+//            }
+//        });
 
         mTargetPriceEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -167,36 +172,33 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.v("REPO_TOKEN", "destroy");
+        Log.v(WowhqApplication.LOG_TAG, "onDestroy - TokenActivity");
         mWoWTokenPresenter.destroy();
     }
 
     @Override
     public void startService() {
-        Log.v("REPO_TOKEN", "Начало старт сервис");
-
-        Intent intent = new Intent(WoWTokenService.ACTION_START);
+        //Intent intent = new Intent(WoWTokenService.ACTION); -- не работает
+        Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
         intent.putExtra(WoWTokenService.IS_FROM_ACTICITY, true);
-        stopService(intent); //На всякий...
-        Log.v("REPO_TOKEN", "stopService отработал");
-
+        //stopService(intent); //Доллжен останавливатся обязательно, если метод вызывается при обновление параметров TargetЦены и Bool - отсылатьли уведомления
         startService(intent);
-        Log.v("REPO_TOKEN", "Конец старт сервис");
 
     }
 
     @Override
     public void stopService() {
-        Intent intent = new Intent(WoWTokenService.ACTION_STOP);
+        //Intent intent = new Intent(WoWTokenService.ACTION);
+        Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
         stopService(intent);
     }
 
     @Override
     public void setPrice(long min, long max, long current, long lastChange, int icon) {
-        mMinText.setText(getResources().getString(R.string.token_min) + " " +Long.toString(min));
-        mMaxText.setText(getResources().getString(R.string.token_max) + " " +Long.toString(max));
-        mCurrentText.setText(getResources().getString(R.string.token_current) + " " +Long.toString(current));
-        mLastChangeText.setText(getResources().getString(R.string.token_change) + " " + Long.toString(lastChange));
+        mMinText.setText(String.format(getResources().getString(R.string.token_min), Long.toString(min)));
+        mMaxText.setText(String.format(getResources().getString(R.string.token_max), Long.toString(max)));
+        mCurrentText.setText(String.format(getResources().getString(R.string.token_current), Long.toString(current)));
+        mLastChangeText.setText(String.format(getResources().getString(R.string.token_change), Long.toString(lastChange)));
         mArrowSwitcher.setImageResource(mArrows[icon]);
     }
 

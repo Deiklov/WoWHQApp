@@ -27,6 +27,7 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
         mWoWTokenView.setBox(mSettingRepository.getWoWTokenServiceEnable());
         mWoWTokenView.setRadioBtn(mSettingRepository.getTargetPriceSig());
         mWoWTokenView.setTargetPriceEditText(mSettingRepository.getTargetPrice());
+        mWoWTokenView.stopService();
         mWoWTokenView.startService();
     }
 
@@ -39,6 +40,7 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
     @Override
     public void setServiceStatus(Boolean val) {
         mSettingRepository.setWoWTokenServiceEnable(val);
+        mWoWTokenView.stopService();
         mWoWTokenView.startService();
     }
 
@@ -46,12 +48,15 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
     public void setTargetPrice(Boolean val, long price) {
         mSettingRepository.setTargetPrice(price);
         mSettingRepository.setTargetPriceSig(val);
+        mWoWTokenView.stopService();
         mWoWTokenView.startService();
     }
 
     @Override
     public void destroy() {
         mTokenRepository.destroy();
-        mWoWTokenView.stopService();
+        if (!mSettingRepository.getWoWTokenServiceEnable()) {
+            mWoWTokenView.stopService();
+        }
     }
 }

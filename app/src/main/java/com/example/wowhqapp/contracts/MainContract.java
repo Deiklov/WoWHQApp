@@ -86,9 +86,11 @@ public interface MainContract {
     }
     interface WoWTokenServicePresenter{
         void init(boolean is_from_activity);
+        void destroy();
     }
     interface WoWTokenServiceView{
         void makeNotification(long current_price);
+        void stopService();
     }
     interface TokenServiceRepository{
         long saveWoWTokenAndGetCurrentPrice();

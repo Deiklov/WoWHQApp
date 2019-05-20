@@ -9,6 +9,8 @@ import com.example.wowhqapp.databases.database.AucAndTokenDataBase;
 
 public class WowhqApplication extends Application {
 
+    public static final String LOG_TAG = "LOG_TAG";
+
     public static WowhqApplication instance;
     private AucAndTokenDataBase mAucAndTokenDataBase;
     private TalentsCalculatorDatabase mTalentCalcDb;

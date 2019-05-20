@@ -2,6 +2,7 @@ package com.example.wowhqapp.repositories;
 
 import android.util.Log;
 
+import com.example.wowhqapp.WowhqApplication;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.databases.dao.WoWTokenDao;
 import com.example.wowhqapp.databases.database.AucAndTokenDataBase;
@@ -35,12 +36,11 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
                 .subscribe(new Consumer<List<WoWToken>>() {
                     @Override
                     public void accept(List<WoWToken> woWToken) throws Exception {
-                        Log.v("REPO_TOKEN", "accept сработал");
-                        if (woWToken.isEmpty()){mWoWToken = null; Log.v("REPO_TOKEN", "Получили нулевой токен");}
+                        if (woWToken.isEmpty()){mWoWToken = null; Log.v(WowhqApplication.LOG_TAG, "Из Данных по токену в БД нет, инициализации не будет");}
                         else {
                             mWoWToken = woWToken.get(0);
                             mWoWTokenPresenter.initPrice();
-                            Log.v("REPO_TOKEN", "Получили НЕ нулевой токен");
+                            Log.v(WowhqApplication.LOG_TAG, "Инициализировали значения из БД");
                         }
                     }
                 })
@@ -57,7 +57,6 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
         long num = 112*coef;
         WoWToken woWToken = new WoWToken("eu", "2019", num,num,num,num);
         mWoWTokenDao.insert(woWToken);
-        Log.v("REPO_TOKEN", "Insert");
     }
 
     @Override
@@ -67,7 +66,6 @@ public class WoWTokenRepo implements MainContract.TokenRepository {
 
     @Override
     public long getMin() {
-        Log.v("REPO_TOKEN", "Вызван GetMin");
         return mWoWToken.getOneDayLow();
     }
 
