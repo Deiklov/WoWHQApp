@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Random;
 
 public class TalentsWowClassesFragment extends Fragment {
-    private TalentsContract.TalentsView mTalentsView;
     private TalentsContract.TalentsPresenter mTalentsPresenter;
     private TalentsWowClassesAdapter mWowClassesAdapter;
 
@@ -34,11 +33,10 @@ public class TalentsWowClassesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_classes_list, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_classes_or_specs_list, container, false);
         mTalentsPresenter = ((TalentsContract.TalentsView) getActivity()).getTalentsPresenter(); // TODO
-        mTalentsView = (TalentsContract.TalentsView) getActivity();
 
-        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_classes_list);
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_classes_or_specs_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(fragmentView.getContext()));
 
         mWowClassesAdapter = new TalentsWowClassesAdapter();
@@ -65,11 +63,11 @@ public class TalentsWowClassesFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView idView = v.findViewById(R.id.fragment_talents_wow_class_elem_id);
+                    // TextView idView = v.findViewById(R.id.fragment_talents_wow_class_elem_id);
 
-                    int id = Integer.parseInt(idView.getText().toString());
+                    int id = Integer.parseInt(mIdView.getText().toString());
                     mTalentsPresenter.getSettingRepository().setTalentsWowClassId(id);
-                    mTalentsPresenter.loadStage(true);
+                    mTalentsPresenter.loadStage(false);
                 }
             });
         }
@@ -80,7 +78,7 @@ public class TalentsWowClassesFragment extends Fragment {
         private Bitmap mBitmap;
 
         TalentsWowClassesAdapter() {
-            mBitmap = Bitmap.createBitmap(fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
+            mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
             mWowClasses = new ArrayList<>();
         }
 
@@ -106,7 +104,6 @@ public class TalentsWowClassesFragment extends Fragment {
             Log.d("TAG", "binding element at position " + i);
 
             talentsWowClassesViewHolder.mImageView.setBackground(bitmapDrawable);
-
         }
 
         @Override
@@ -116,16 +113,6 @@ public class TalentsWowClassesFragment extends Fragment {
 
         public void setWowClasses(List<WowClass> wowClasses) {
             mWowClasses = wowClasses;
-        }
-
-
-        private int[] fillColorsTemp() {
-            int[] ints = new int[40000];
-            Random random = new Random();
-            for (int j = 0; j < ints.length; j++) {
-                ints[j] = Color.rgb(random.nextInt(100), 100, random.nextInt(100));
-            }
-            return ints;
         }
     }
 

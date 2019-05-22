@@ -95,19 +95,16 @@ public class TalentsRepository implements TalentsContract.TalentsRepository {
     }
 
         @Override
-    public void refresh() {
-        try {
-            loadWowClasses();
-            loadWowSpecs();
-            mWowTalentDao.deleteAll();
+    public void refresh() throws IOException {
+        loadWowClasses();
+        loadWowSpecs();
+        mWowTalentDao.deleteAll();
 
-            int savedWowSpecId = mSettingRepository.getTalentsWowSpecId();
-            if (savedWowSpecId != -1) {
-                loadWowTalents(savedWowSpecId);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        int savedWowSpecId = mSettingRepository.getTalentsWowSpecId();
+        if (savedWowSpecId != -1) {
+            loadWowTalents(savedWowSpecId);
         }
+
     }
 
 

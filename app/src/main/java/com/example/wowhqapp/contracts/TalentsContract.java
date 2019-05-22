@@ -8,6 +8,7 @@ import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
 import com.example.wowhqapp.databases.entity.WowTalents;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface TalentsContract {
@@ -16,7 +17,7 @@ public interface TalentsContract {
         List<WowSpec> getWowSpecs();
         WowTalents getWowTalents(int specId);
         WowTalents getWowTalents();
-        void refresh();
+        void refresh() throws IOException;
     }
 
     public interface TalentsPresenter {
@@ -24,6 +25,7 @@ public interface TalentsContract {
         void resetProgress();
         TalentsRepository getTalentsRepository();
         MainContract.SettingRepository getSettingRepository();
+        int[] fillColorsTemp();
     }
 
     public interface TalentsView {

@@ -6,12 +6,10 @@
     android:orientation="horizontal">
 
 
-
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/talents_recycler_view_wow_classes_list"
+        android:id="@+id/talents_recycler_view_wow_classes_or_specs_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"/>
-
 
 </LinearLayout>

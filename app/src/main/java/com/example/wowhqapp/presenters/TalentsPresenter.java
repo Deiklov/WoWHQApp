@@ -1,6 +1,7 @@
 package com.example.wowhqapp.presenters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
@@ -10,6 +11,9 @@ import com.example.wowhqapp.fragments.talents.TalentsWowClassesFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowSpecsFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowTalentsFragment;
 import com.example.wowhqapp.repositories.TalentsRepository;
+
+import java.io.IOException;
+import java.util.Random;
 
 public class TalentsPresenter implements TalentsContract.TalentsPresenter {
 
@@ -29,12 +33,12 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
     }
 
     public Fragment selectFragment() {
-        if (mSettingRepository.getTalentsWowClassId() != -1) {
-            return new TalentsWowSpecsFragment();
-        } else if (
-                mSettingRepository.getTalentsWowSpecId() != -1 &&
-                mSettingRepository.getTalentsWowSpecOrder() != -1) {
+        if (mSettingRepository.getTalentsWowSpecId() != -1 &&
+            mSettingRepository.getTalentsWowSpecOrder() != -1
+        ) {
             return new TalentsWowTalentsFragment();
+        } else if (mSettingRepository.getTalentsWowClassId() != -1) {
+            return new TalentsWowSpecsFragment();
         }
 
         return new TalentsWowClassesFragment();
@@ -57,12 +61,28 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
         return mSettingRepository;
     }
 
+    @Override
+    public int[] fillColorsTemp() {
+        int[] ints = new int[40000];
+        Random random = new Random();
+        for (int j = 0; j < ints.length; j++) {
+            ints[j] = Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255));
+        }
+        return ints;
+    }
+
     class TalentsPresenterAsyncLoader extends AsyncTask<Boolean, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Boolean... booleans) {
-            if (mSettingRepository.getLang() != mSettingRepository.getTalentsLang()) {
+            String oldTalentLang = mSettingRepository.getTalentsLang();
+            if (mSettingRepository.getLang() != oldTalentLang) {
                 mSettingRepository.setTalentsLang(mSettingRepository.getLang());
-                mTalentsRepository.refresh();
+                try {
+                    mTalentsRepository.refresh();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    mSettingRepository.setTalentsLang(oldTalentLang);
+                }
             }
             return booleans[0];
         }
