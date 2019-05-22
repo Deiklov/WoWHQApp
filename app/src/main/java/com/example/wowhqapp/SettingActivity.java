@@ -5,14 +5,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.repositories.SettingRepository;
@@ -20,6 +18,10 @@ import com.example.wowhqapp.presenters.SettingPresenter;
 
 import com.example.wowhqapp.repositories.SettingRepository;
 import com.example.wowhqapp.presenters.SettingPresenter;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 
 public class SettingActivity extends AppCompatActivity implements MainContract.SettingView {
 
@@ -49,7 +51,6 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
         mSettingPresenter = new SettingPresenter(new SettingRepository(getSharedPreferences(SettingRepository.APP_PREFERENCES, Context.MODE_PRIVATE)), this);
 
         mRegionSpinner = (Spinner) findViewById(R.id.setting_spin_region);
-        mRegionSpinner.setSelection(1);
         mSlugSpinner = (Spinner) findViewById(R.id.setting_spin_server);
         mLangSpinner = (Spinner) findViewById(R.id.setting_spin_lang);
         mToolbar = (Toolbar) findViewById(R.id.setting_toolbar);
@@ -98,14 +99,10 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
 
     @Override
     public void SetSpinnerValues(String slug, String region, String lang) {
-        ArrayAdapter regionSpinnerAdapter =  (ArrayAdapter) mRegionSpinner.getAdapter();
-        mRegionSpinner.setSelection(regionSpinnerAdapter.getPosition(region));
 
-        ArrayAdapter slugSpinnerAdapter =  (ArrayAdapter) mSlugSpinner.getAdapter();
-        mSlugSpinner.setSelection(slugSpinnerAdapter.getPosition(slug));
-
-        ArrayAdapter langSpinnerAdapter =  (ArrayAdapter) mLangSpinner.getAdapter();
-        mLangSpinner.setSelection(langSpinnerAdapter.getPosition(lang));
+        mRegionSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.regions)).indexOf(region));
+        mSlugSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.slugs)).indexOf(slug));
+        mLangSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.langs)).indexOf(lang));
 
     }
 

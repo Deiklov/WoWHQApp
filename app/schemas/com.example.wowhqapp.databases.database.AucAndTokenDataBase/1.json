@@ -1,0 +1,72 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1435036fe0c9a3a0fbfa922f2059230b",
+    "entities": [
+      {
+        "tableName": "WoWToken",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`region` TEXT NOT NULL, `date` TEXT, `currentPriceBlizzardApi` INTEGER, `lastChange` INTEGER, `oneDayLow` INTEGER, `oneDayHigh` INTEGER, PRIMARY KEY(`region`))",
+        "fields": [
+          {
+            "fieldPath": "region",
+            "columnName": "region",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "currentPriceBlizzardApi",
+            "columnName": "currentPriceBlizzardApi",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastChange",
+            "columnName": "lastChange",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "oneDayLow",
+            "columnName": "oneDayLow",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "oneDayHigh",
+            "columnName": "oneDayHigh",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "region"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_WoWToken_region",
+            "unique": false,
+            "columnNames": [
+              "region"
+            ],
+            "createSql": "CREATE  INDEX `index_WoWToken_region` ON `${TABLE_NAME}` (`region`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1435036fe0c9a3a0fbfa922f2059230b\")"
+    ]
+  }
+}

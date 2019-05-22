@@ -9,10 +9,13 @@ public class SettingRepository implements MainContract.SettingRepository {
     private SharedPreferences mPreferences;
     private SharedPreferences.Editor mEditor;
     public static final String APP_PREFERENCES = "App_setting";
-    
     private static final String SLUG = "Slug";
     private static final String REGION = "Region";
     private static final String LANG = "Language";
+    private static final String WoWTokenServiceEnable = "WoWTokenServiceEnable"; //Отвечает за следующее: слать ли уведомления, соответственно запускаться ли самостоятельно , рисование галочки
+    private static final String TARGET_PRICE = "WoWTokenTargetPrice";
+    private static final String TARGET_PRICE_SIGN = "WoWTokenTargetPrice_Sign";
+
 
     private static final String TALENTS_LANG = "Talents_language";
     private static final String TALENTS_WOWCLASS_ID = "Talents_wowClass_id";
@@ -39,7 +42,7 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public String getRegion() {
-        return mPreferences.getString(REGION, "no region");
+        return mPreferences.getString(REGION, "eu");
     }
 
     @Override
@@ -50,7 +53,7 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public String getLang() {
-        return mPreferences.getString(LANG, "ru");
+        return mPreferences.getString(LANG, "no lang");
     }
 
     @Override
@@ -75,7 +78,45 @@ public class SettingRepository implements MainContract.SettingRepository {
         return mPreferences.getInt(TALENTS_WOWCLASS_ID, -1);
     }
 
+	@Override
+    public Boolean getWoWTokenServiceEnable() {
+        Boolean value = mPreferences.getBoolean(WoWTokenServiceEnable, false);
+        //Log.v(WowhqApplication.LOG_TAG, "Нужны ли уведомления (чек бокс): "+String.valueOf(value));
+        return value;
+    }
+
+
     @Override
+    public Boolean getTargetPriceSig() {
+        Boolean value = mPreferences.getBoolean(TARGET_PRICE_SIGN, false);
+        return value;
+    }
+
+    @Override
+    public long getTargetPrice() {
+        long value = mPreferences.getLong(TARGET_PRICE, 123321);
+        return value;
+    }
+
+    @Override
+    public void setTargetPrice(long val) {
+        mEditor.putLong(TARGET_PRICE, val);
+        mEditor.apply();
+    }
+
+    @Override
+    public void setTargetPriceSig(Boolean val) {
+        mEditor.putBoolean(TARGET_PRICE_SIGN, val);
+        mEditor.apply();
+    }
+
+    @Override
+    public void setWoWTokenServiceEnable(Boolean val) {
+        mEditor.putBoolean(WoWTokenServiceEnable, val);
+        mEditor.apply();
+    }
+
+	@Override
     public void setTalentsWowClassId(int wowClassId) {
         mEditor.putInt(TALENTS_WOWCLASS_ID, wowClassId);
         mEditor.apply();

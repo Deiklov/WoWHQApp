@@ -22,10 +22,16 @@ public interface MainContract {
     }
     interface SettingRepository{
         String getSlug();
-        void setSlug(String value);
         String getRegion();
-        void setRegion(String value);
         String getLang();
+        Boolean getWoWTokenServiceEnable();
+        Boolean getTargetPriceSig();
+        long getTargetPrice();
+        void setTargetPrice(long val);
+        void setTargetPriceSig(Boolean val);
+        void setWoWTokenServiceEnable(Boolean val);
+        void setSlug(String value);
+        void setRegion(String value);
         void setLang(String value);
 
         String getTalentsLang();
@@ -51,4 +57,52 @@ public interface MainContract {
         void SetSpinnerValues(String slug, String region, String lang);
         void CloseSetting();
     }
+    interface AuctionsPresenter{
+        void init(Boolean type, String[] titles);
+        void MenuItemSelected();
+    }
+    interface AuctionsView{
+        void closeAuctions();
+        void setTitle(String txt);
+        void setFragment(Boolean type);
+    }
+
+    //WoWToken
+    interface WoWTokenView{
+        void startService();
+        void stopService();
+        void setPrice(long min, long max, long current, long lastChange, int icon);
+        void setBox(Boolean val);
+        void setRadioBtn(Boolean val);
+        void setTargetPriceEditText(long price);
+    }
+    interface WoWTokenPresenter{
+        void initPrice();
+        void initTargetPriceAndStartService();
+        void test_updateToken(int coef);
+        void setServiceStatus(Boolean val);
+        void setTargetPrice(Boolean val, long price);
+        void destroy();
+    }
+    interface TokenRepository{
+        void refreshMinMaxCurrent();
+        void test_insertToken(int coef);
+        long getMax();
+        long getMin();
+        long getCurrent();
+        long getlastChange();
+        void destroy();
+    }
+    interface WoWTokenServicePresenter{
+        void init(boolean is_from_activity);
+        void destroy();
+    }
+    interface WoWTokenServiceView{
+        void makeNotification(long current_price, String region);
+        void stopService();
+    }
+    interface TokenServiceRepository{
+        long saveWoWTokenAndGetCurrentPrice();
+    }
+
 }

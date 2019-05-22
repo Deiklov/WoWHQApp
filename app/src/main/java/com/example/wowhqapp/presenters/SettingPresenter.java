@@ -7,7 +7,6 @@ import com.example.wowhqapp.repositories.SettingRepository;
 public class SettingPresenter implements MainContract.SettingPresenter {
 
     private SettingRepository mSettingRepository;
-    private MainContract.MenuView mMenuView;
     private MainContract.SettingView mSettingView;
 
     public SettingPresenter(SettingRepository repository, MainContract.SettingView settingView){

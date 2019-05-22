@@ -16,6 +16,7 @@
     <string name="talents_a_bar_title_text">Таланты</string>
     <string name="set_this_text_from_resource">Set this text from resource</string>
     <string name="talents_button_reset_text">Сбросить выбор</string>
+    <string name="auctions_title">Аукционы</string>
     <string-array name="langs">
         <item>ru</item>
         <item>en</item>
@@ -26,6 +27,10 @@
     <string-array name="regions">
         <item>us</item>
         <item>eu</item>
+    </string-array>
+    <string-array name="auction_title">
+        <item>Сделки</item>
+        <item>Аукцион</item>
     </string-array>
     <string-array name="slugs">
         <item>aegwynn</item>
@@ -759,4 +764,18 @@
         <item>zuljin</item>
         <item>zuluhed</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="token_title">Текущая цена</string>
+    <string name="token_current">Текущая цена: %s</string>
+    <string name="token_max">Max: %s</string>
+    <string name="token_min">Min: %s</string>
+    <string name="token_start">Оповестить, если цена..</string>
+    <string name="token_change">Изменения: %s</string>
+    <string name="token_rbtn_low">..меньше:</string>
+    <string name="token_rbtn_high">..больше:</string>
+    <string name="token_input_error">Проверьте правильность ввода ;)</string>
+    <string name="token_notification_title">WoWToken:обновление.</string>
+    <string name="token_notification_text">Йуху! Токен превзошел ваши ожидания: </string>
 </resources>
