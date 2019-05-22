@@ -58,7 +58,6 @@ public class TalentsWowClassesFragment extends Fragment {
 
         TalentsWowClassesViewHolder(@NonNull View itemView) {
             super(itemView);
-
             mImageView = itemView.findViewById(R.id.fragment_talents_wow_class_elem_img);
             mNameView = itemView.findViewById(R.id.fragment_talents_wow_class_elem_name);
             mIdView = itemView.findViewById(R.id.fragment_talents_wow_class_elem_id);
