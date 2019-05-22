@@ -1,28 +1,31 @@
 package com.example.wowhqapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wowhqapp.contracts.MainContract;
+import com.example.wowhqapp.databases.entity.Lot;
+import com.example.wowhqapp.fragments.auctions.AuctionListFragment;
+import com.example.wowhqapp.fragments.auctions.dummy.DummyContent;
 import com.example.wowhqapp.presenters.AuctionsPresenter;
 import com.example.wowhqapp.repositories.SettingRepository;
 
-public class AuctionAndDealsActivity extends AppCompatActivity implements MainContract.AuctionsView {
+import java.util.List;
+
+public class AuctionAndDealsActivity extends AppCompatActivity implements MainContract.AuctionsView, AuctionListFragment.OnListFragmentInteractionListener {
 
     private AuctionsPresenter mAuctionsPresenter;
     private Toolbar mToolbar;
     private TextView mToolbarTitle;
+    private AuctionListFragment mAuctionsFragment;
 
 
     @Override
@@ -30,8 +33,12 @@ public class AuctionAndDealsActivity extends AppCompatActivity implements MainCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auction_and_deals);
 
-        mToolbar = (Toolbar) findViewById(R.id.auctions_toolbar);
+        Fragment auctions_frament = getSupportFragmentManager().findFragmentById(R.id.auctions_frame_lay);
+        if (auctions_frament == null) {
+            mAuctionsFragment = new AuctionListFragment();
+        }
 
+        mToolbar = (Toolbar) findViewById(R.id.auctions_toolbar);
         mAuctionsPresenter = new AuctionsPresenter(this, new SettingRepository(getSharedPreferences(SettingRepository.APP_PREFERENCES, Context.MODE_PRIVATE)));
 
         setSupportActionBar(mToolbar);
@@ -68,13 +75,28 @@ public class AuctionAndDealsActivity extends AppCompatActivity implements MainCo
 
     @Override
     public void setFragment(Boolean type) {
-        Fragment auctions_frame_l = getSupportFragmentManager().findFragmentById(R.id.auctions_frame_lay);
-        if (auctions_frame_l == null) {
-            AuctionsFragment auctionsFragment = new AuctionsFragment();
             Bundle bundle = new Bundle();
-            bundle.putBoolean(AuctionsFragment.KEY_TYPE, type);
-            auctionsFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().add(R.id.auctions_frame_lay, auctionsFragment).commit();
+            bundle.putBoolean(AuctionListFragment.KEY_TYPE, type);
+            mAuctionsFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in,android.R.animator.fade_out)
+                    .add(R.id.auctions_frame_lay, mAuctionsFragment).commit();
         }
+
+    @Override
+    public void initAdapter(List<Lot> lotList) {
+        mAuctionsFragment.initAdapter(lotList);
+
+    }
+
+    @Override
+    public void notifyAuctionsChange() {
+        mAuctionsFragment.notifyAuctionsChange();
+    }
+
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+        Log.v(WowhqApplication.LOG_TAG, "onListFragmentInteraction - это обработчик нажатия на элемент списка (Лот), AuctionAndDeals Activity");
     }
 }

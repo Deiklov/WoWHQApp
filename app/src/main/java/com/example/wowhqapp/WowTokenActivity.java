@@ -44,35 +44,28 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
     private Button mTestBtn;
     private Button mTestBtn2;
 
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        Log.v("REPO_TOKEN", "Resume");
-
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wow_token);
 
-        mTestEditTExt = (EditText) findViewById(R.id.test_coef_et);
-        mTestBtn = (Button) findViewById(R.id.test_btn);
-        mTestBtn2 = (Button) findViewById(R.id.test_btn2);
-
-        mTestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mWoWTokenPresenter.test_updateToken(Integer.parseInt(mTestEditTExt.getText().toString()));
-                //mWoWTokenPresenter.initPrice();
-            }
-        });
-        mTestBtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+//        mTestEditTExt = (EditText) findViewById(R.id.test_coef_et);
+//        mTestBtn = (Button) findViewById(R.id.test_btn);
+//        mTestBtn2 = (Button) findViewById(R.id.test_btn2);
+//
+//        mTestBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mWoWTokenPresenter.test_updateToken(Integer.parseInt(mTestEditTExt.getText().toString()));
+//                //mWoWTokenPresenter.initPrice();
+//            }
+//        });
+//        mTestBtn2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//            }
+//        });
 
         mWoWTokenPresenter = new WoWTokenPresenter(new SettingRepository(getSharedPreferences(SettingRepository.APP_PREFERENCES, Context.MODE_PRIVATE)), this);
 
@@ -118,15 +111,6 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
         mLowRadioButton.setOnClickListener(radioButtonClickListener);
         mHighRadioButton.setOnClickListener(radioButtonClickListener);
 
-//        mTargetPriceEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (!hasFocus){
-//                    Log.v("REPO_TOKEN", "Фокус изменился");
-//                    mWoWTokenPresenter.setTargetPrice(mHighRadioButton.isChecked(), Long.parseLong(mTargetPriceEditText.getText().toString()));
-//                }
-//            }
-//        });
 
         mTargetPriceEditText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -178,17 +162,14 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
 
     @Override
     public void startService() {
-        //Intent intent = new Intent(WoWTokenService.ACTION); -- не работает
         Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
         intent.putExtra(WoWTokenService.IS_FROM_ACTIVITY, true);
-        //stopService(intent); //Доллжен останавливатся обязательно, если метод вызывается при обновление параметров TargetЦены и Bool - отсылатьли уведомления
         startService(intent);
 
     }
 
     @Override
     public void stopService() {
-        //Intent intent = new Intent(WoWTokenService.ACTION);
         Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
         stopService(intent);
     }

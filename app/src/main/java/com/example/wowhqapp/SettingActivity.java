@@ -1,27 +1,21 @@
 package com.example.wowhqapp;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.wowhqapp.contracts.MainContract;
-import com.example.wowhqapp.repositories.SettingRepository;
 import com.example.wowhqapp.presenters.SettingPresenter;
-
 import com.example.wowhqapp.repositories.SettingRepository;
-import com.example.wowhqapp.presenters.SettingPresenter;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 
 public class SettingActivity extends AppCompatActivity implements MainContract.SettingView {
 
@@ -30,6 +24,7 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
     private Spinner mRegionSpinner;
     private Spinner mSlugSpinner;
     private Spinner mLangSpinner;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

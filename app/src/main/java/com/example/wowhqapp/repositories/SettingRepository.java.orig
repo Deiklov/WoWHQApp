@@ -23,11 +23,14 @@ public class SettingRepository implements MainContract.SettingRepository {
     private static final String TALENTS_WOWCLASS_ID = "Talents_wowClass_id";
     private static final String TALENTS_WOWSPEC_ID = "Talents_wowSpec_id";
     private static final String TALENTS_WOWSPEC_ORDER = "Talents_wowSpec_order";
+<<<<<<< HEAD
     private static final String TALENTS_WOWTALENT_ID = "Talents_wowTalent_id";
     private static final String TALENTS_ACTIVITY_TITLE_STATE = "TALENTS_ACTIVITY_TITLE_STATE";
+
+
+=======
     private final AuctionsDao mAuctionsDao;
-
-
+>>>>>>> RV, logic
 
 
     public SettingRepository(SharedPreferences preferences){

@@ -27,4 +27,8 @@ public class AucAndTokenNetwork {
     public WoWTokenApi getWoWTokenAPI(){
         return mRetrofit.create(WoWTokenApi.class);
     }
+    public AuctionsApi getAuctionsAPI(){
+        return mRetrofit.create(AuctionsApi.class);
+    }
+
 }

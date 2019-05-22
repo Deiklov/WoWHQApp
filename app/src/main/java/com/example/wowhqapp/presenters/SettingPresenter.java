@@ -1,7 +1,6 @@
 package com.example.wowhqapp.presenters;
 
 import com.example.wowhqapp.contracts.MainContract;
-import com.example.wowhqapp.MenuActivity;
 import com.example.wowhqapp.repositories.SettingRepository;
 
 public class SettingPresenter implements MainContract.SettingPresenter {

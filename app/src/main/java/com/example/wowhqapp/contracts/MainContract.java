@@ -1,5 +1,9 @@
 package com.example.wowhqapp.contracts;
 
+import com.example.wowhqapp.databases.entity.Lot;
+
+import java.util.List;
+
 public interface MainContract {
 
     interface MenuView{
@@ -61,15 +65,38 @@ public interface MainContract {
         void SetSpinnerValues(String slug, String region, String lang);
         void CloseSetting();
     }
+
+    //Auctions
     interface AuctionsPresenter{
         void init(Boolean type, String[] titles);
         void MenuItemSelected();
+        void notifyUpdatedData();
+        void notifyLittleData();
+        void onScrollDown();
+        void onScrollUp();
     }
     interface AuctionsView{
         void closeAuctions();
         void setTitle(String txt);
         void setFragment(Boolean type);
+        //Туда и в его коллегу передаем список лотов
+        void initAdapter(List<Lot> lotList);
+        void notifyAuctionsChange();
     }
+
+    interface AuctionsListFragView{
+        void initAdapter(List<Lot> lotList);
+        void notifyAuctionsChange();
+    }
+
+    interface AuctionsRepo{
+        List<Lot> getLots();
+        void downloadLots(int page);
+        void deleteAllLots();
+        void destroy();
+
+    }
+
 
     //WoWToken
     interface WoWTokenView{

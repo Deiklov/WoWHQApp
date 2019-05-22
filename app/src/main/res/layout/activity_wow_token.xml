@@ -74,22 +74,22 @@
             android:layout_height="wrap_content" />
 
         <!--Тестовый блок-->
-        <EditText
-            android:visibility="invisible"
-            android:id="@+id/test_coef_et"
-            android:text="125"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/test_btn"
-            android:text="set new token"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/test_btn2"
-            android:text="presente.init"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <!--<EditText-->
+            <!--android:visibility="invisible"-->
+            <!--android:id="@+id/test_coef_et"-->
+            <!--android:text="125"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<Button-->
+            <!--android:id="@+id/test_btn"-->
+            <!--android:text="set new token"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<Button-->
+            <!--android:id="@+id/test_btn2"-->
+            <!--android:text="presente.init"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
         <!--Конец-->
 
 
