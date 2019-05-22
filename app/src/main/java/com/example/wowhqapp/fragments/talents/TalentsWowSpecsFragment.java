@@ -30,18 +30,18 @@ public class TalentsWowSpecsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_classes_or_specs_list, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_obj_list, container, false);
         mTalentsPresenter = ((TalentsContract.TalentsView) getActivity()).getTalentsPresenter(); // TODO
 
-        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_classes_or_specs_list);
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_obj_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(fragmentView.getContext()));
 
         mWowSpecsAdapter = new TalentsWowSpecsAdapter();
 
         recyclerView.setAdapter(mWowSpecsAdapter);
 
-        TalentsWowSpecsAsyncLoader talentsWowSpecsAsyncLoader = new TalentsWowSpecsAsyncLoader();
-        talentsWowSpecsAsyncLoader.execute(mWowSpecsAdapter);
+        TalentsWowSpecsAsyncLoader asyncLoader = new TalentsWowSpecsAsyncLoader();
+        asyncLoader.execute(mWowSpecsAdapter);
 
         return fragmentView;
     }
@@ -132,7 +132,8 @@ public class TalentsWowSpecsFragment extends Fragment {
     class TalentsWowSpecsAsyncLoader extends AsyncTask<TalentsWowSpecsAdapter, Void, TalentsWowSpecsAdapter> {
         @Override
         protected TalentsWowSpecsAdapter doInBackground(TalentsWowSpecsAdapter... talentsWowSpecsAdapters) {
-            talentsWowSpecsAdapters[0].setWowSpecs(mTalentsPresenter.getTalentsRepository().getWowSpecs());
+            int classId = mTalentsPresenter.getSettingRepository().getTalentsWowClassId();
+            talentsWowSpecsAdapters[0].setWowSpecs(mTalentsPresenter.getTalentsRepository().getWowSpecs(classId));
             return talentsWowSpecsAdapters[0];
         }
 

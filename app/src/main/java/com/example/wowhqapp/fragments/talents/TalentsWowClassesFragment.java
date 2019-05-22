@@ -1,7 +1,6 @@
 package com.example.wowhqapp.fragments.talents;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import com.example.wowhqapp.databases.entity.WowClass;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TalentsWowClassesFragment extends Fragment {
     private TalentsContract.TalentsPresenter mTalentsPresenter;
@@ -33,18 +31,18 @@ public class TalentsWowClassesFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_classes_or_specs_list, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_obj_list, container, false);
         mTalentsPresenter = ((TalentsContract.TalentsView) getActivity()).getTalentsPresenter(); // TODO
 
-        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_classes_or_specs_list);
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_obj_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(fragmentView.getContext()));
 
         mWowClassesAdapter = new TalentsWowClassesAdapter();
 
         recyclerView.setAdapter(mWowClassesAdapter);
 
-        TalentsWowClassesAsyncLoader talentsWowClassesAsyncLoader = new TalentsWowClassesAsyncLoader();
-        talentsWowClassesAsyncLoader.execute(mWowClassesAdapter);
+        TalentsWowClassesAsyncLoader asyncLoader = new TalentsWowClassesAsyncLoader();
+        asyncLoader.execute(mWowClassesAdapter);
 
         return fragmentView;
     }

@@ -69,5 +69,4 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
     public TalentsContract.TalentsPresenter getTalentsPresenter() {
         return mTalentsPresenter;
     }
-
 }

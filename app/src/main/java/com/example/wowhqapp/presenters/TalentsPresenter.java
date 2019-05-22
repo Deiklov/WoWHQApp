@@ -9,6 +9,7 @@ import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.fragments.talents.TalentsWowClassesFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowSpecsFragment;
+import com.example.wowhqapp.fragments.talents.TalentsWowTalentInfoFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowTalentsFragment;
 import com.example.wowhqapp.repositories.TalentsRepository;
 
@@ -33,10 +34,16 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
     }
 
     public Fragment selectFragment() {
-        if (mSettingRepository.getTalentsWowSpecId() != -1 &&
+        if (mSettingRepository.getTalentsWowTalentId() != -1) {
+            return new TalentsWowTalentInfoFragment();
+            // TODO(nickeskov): не забюыть сбросить значение
+            //  выбранного таланта в констркуторе фрагмента TalentsWowTalentInfoFragment
+
+        } else if (mSettingRepository.getTalentsWowSpecId() != -1 &&
             mSettingRepository.getTalentsWowSpecOrder() != -1
         ) {
             return new TalentsWowTalentsFragment();
+
         } else if (mSettingRepository.getTalentsWowClassId() != -1) {
             return new TalentsWowSpecsFragment();
         }
@@ -49,6 +56,7 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
         mSettingRepository.setTalentsWowClassId(-1);
         mSettingRepository.setTalentsWowSpecId(-1);
         mSettingRepository.setTalentsWowSpecOrder(-1);
+        mSettingRepository.setTalentsWowTalentId(-1);
     }
 
     @Override

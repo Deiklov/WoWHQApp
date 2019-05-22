@@ -24,7 +24,7 @@ public interface WowTalentDao {
     @Query("SELECT * FROM wowspec WHERE id=:specId")
     WowSpec getSpec(int specId);
 
-    @Query("SELECT * FROM talent WHERE specId=:specId")
+    @Query("SELECT * FROM talent WHERE specId=:specId ORDER BY `row`, col ASC")
     List<Talent> getBySpecId(int specId);
 
 

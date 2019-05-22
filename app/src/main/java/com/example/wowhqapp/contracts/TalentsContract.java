@@ -14,7 +14,7 @@ import java.util.List;
 public interface TalentsContract {
     public interface TalentsRepository {
         List<WowClass> getWowClasses();
-        List<WowSpec> getWowSpecs();
+        List<WowSpec> getWowSpecs(int classId);
         WowTalents getWowTalents(int specId);
         WowTalents getWowTalents();
         void refresh() throws IOException;

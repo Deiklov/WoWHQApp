@@ -64,8 +64,8 @@ public class TalentsRepository implements TalentsContract.TalentsRepository {
     }
 
     @Override
-    public List<WowSpec> getWowSpecs() {
-        List<WowSpec> wowSpecs = mWowSpecDao.getAll();
+    public List<WowSpec> getWowSpecs(int classId) {
+        List<WowSpec> wowSpecs = mWowSpecDao.getByClassId(classId);
         if (wowSpecs.isEmpty()) {
             try {
                 wowSpecs = loadWowSpecs();
