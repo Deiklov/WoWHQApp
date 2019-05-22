@@ -9,6 +9,7 @@ import com.example.wowhqapp.databases.dao.WowClassDao;
 import com.example.wowhqapp.databases.dao.WowSpecDao;
 import com.example.wowhqapp.databases.dao.WowTalentDao;
 import com.example.wowhqapp.databases.database.TalentsCalculatorDatabase;
+import com.example.wowhqapp.databases.entity.Talent;
 import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
 import com.example.wowhqapp.databases.entity.WowTalents;
@@ -136,5 +137,10 @@ public class TalentsRepository implements TalentsContract.TalentsRepository {
 
         mWowTalentDao.insert(wowTalents.getTalents());
         return wowTalents;
+    }
+
+    @Override
+    public Talent getWowTalent(int id) {
+        return mWowTalentDao.getById(id);
     }
 }

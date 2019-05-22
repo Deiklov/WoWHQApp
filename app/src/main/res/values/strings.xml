@@ -778,4 +778,5 @@
     <string name="token_input_error">Проверьте правильность ввода ;)</string>
     <string name="token_notification_title">WoWToken:обновление.</string>
     <string name="token_notification_text">Йуху! Токен превзошел ваши ожидания: </string>
+    <string name="talents_button_back">Назад</string>
 </resources>

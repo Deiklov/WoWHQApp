@@ -68,8 +68,8 @@ public class TalentsWowTalentsFragment extends Fragment {
                     int id = Integer.parseInt(mIdView.getText().toString());
                     mTalentsPresenter.getSettingRepository().setTalentsWowTalentId(id);
 
-                    String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
-                    mTalentsPresenter.setTalentsTitle(title);
+                    // String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
+                    // mTalentsPresenter.setTalentsTitle(title);
 
                     mTalentsPresenter.loadStage(false);
                 }

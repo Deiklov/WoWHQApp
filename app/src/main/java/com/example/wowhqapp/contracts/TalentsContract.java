@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.view.View;
 
+import com.example.wowhqapp.databases.entity.Talent;
 import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
 import com.example.wowhqapp.databases.entity.WowTalents;
@@ -19,6 +20,7 @@ public interface TalentsContract {
         List<WowSpec> getWowSpecs(int classId);
         WowTalents getWowTalents(int specId);
         WowTalents getWowTalents();
+        Talent getWowTalent(int id);
         void refresh() throws IOException;
     }
 

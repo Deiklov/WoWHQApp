@@ -51,7 +51,7 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.talents_a_bar);
-        
+
         String title = mTalentsPresenter.getSettingRepository().getTalentsActivityTitle();
         if (title != "none") {
             mTalentsPresenter.setTalentsTitle(title);
@@ -110,7 +110,7 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
     @Override
     public void setTalentsTitle(String newTitle) {
         TextView  title =  findViewById(R.id.talents_a_bar_title);
-        title.setText(newTitle.subSequence(0, newTitle.length()));
+        title.setText(newTitle);
     }
 
     @Override
