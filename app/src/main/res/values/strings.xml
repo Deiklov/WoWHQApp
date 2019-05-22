@@ -773,4 +773,6 @@
     <string name="token_rbtn_low">..меньше:</string>
     <string name="token_rbtn_high">..больше:</string>
     <string name="token_input_error">Проверьте правильность ввода ;)</string>
+    <string name="token_notification_title">WoWToken:обновление.</string>
+    <string name="token_notification_text">Йуху! Токен превзошел ваши ожидания: </string>
 </resources>

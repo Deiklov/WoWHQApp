@@ -89,7 +89,7 @@ public interface MainContract {
         void destroy();
     }
     interface WoWTokenServiceView{
-        void makeNotification(long current_price);
+        void makeNotification(long current_price, String region);
         void stopService();
     }
     interface TokenServiceRepository{

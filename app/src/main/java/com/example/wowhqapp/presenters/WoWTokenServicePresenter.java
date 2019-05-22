@@ -27,7 +27,7 @@ public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePre
     public WoWTokenServicePresenter(SettingRepository settingRepository, MainContract.WoWTokenServiceView woWTokenServiceView){
         mSettingRepository = settingRepository;
         mWoWTokenServiceView = woWTokenServiceView;
-        mTokenServiceRepository = new WoWTokenServiceRepo();
+        mTokenServiceRepository = new WoWTokenServiceRepo(mSettingRepository.getRegion());
 
         //Больше/Меньше
         target_price_sign = mSettingRepository.getTargetPriceSig();
@@ -66,6 +66,7 @@ public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePre
         Log.v(WowhqApplication.LOG_TAG, "Вызван scanWoWToken");
 
         long current_price = mTokenServiceRepository.saveWoWTokenAndGetCurrentPrice();
+        Log.v(WowhqApplication.LOG_TAG, "[NOTYFICATION_DEBUG]Текущая цена по версии Presenter (Service): "+String.valueOf(current_price));
 
         //Смотрим, делать ли уведомление
         if (is_check_target_price && (last_notification_price != current_price) &&
@@ -73,8 +74,8 @@ public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePre
                         || (target_price < current_price && target_price_sign)
                         || target_price == current_price)){
 
-            Log.v(WowhqApplication.LOG_TAG, "scanWoWToken одобрил отправку уведомления");
-            mWoWTokenServiceView.makeNotification(current_price);
+            Log.v(WowhqApplication.LOG_TAG, "[NOTYFICATION_DEBUG]scanWoWToken одобрил отправку уведомления");
+            mWoWTokenServiceView.makeNotification(current_price, mSettingRepository.getRegion());
             last_notification_price = current_price;
         }
     }

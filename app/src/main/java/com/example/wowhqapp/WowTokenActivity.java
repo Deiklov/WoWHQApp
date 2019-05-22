@@ -180,7 +180,7 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
     public void startService() {
         //Intent intent = new Intent(WoWTokenService.ACTION); -- не работает
         Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
-        intent.putExtra(WoWTokenService.IS_FROM_ACTICITY, true);
+        intent.putExtra(WoWTokenService.IS_FROM_ACTIVITY, true);
         //stopService(intent); //Доллжен останавливатся обязательно, если метод вызывается при обновление параметров TargetЦены и Bool - отсылатьли уведомления
         startService(intent);
 
