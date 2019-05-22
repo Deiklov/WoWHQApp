@@ -1,6 +1,7 @@
 package com.example.wowhqapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,6 +20,7 @@ import com.example.wowhqapp.repositories.SettingRepository;
 public class TalantsAndBuildsActivity extends AppCompatActivity implements TalentsContract.TalentsView {
 
     // public String TYPE;
+    private final String SAVED_ACTIVITY_TITLE = "talents_and_build_activity_title";
     private Toolbar mToolbar;
     private Button mResetButton;
     private FragmentManager mFragmentManager;
@@ -49,9 +51,28 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.talents_a_bar);
-        ((TextView) findViewById(R.id.talents_a_bar_title)).setText(R.string.talents_a_bar_title_text);
+        
+        String title = mTalentsPresenter.getSettingRepository().getTalentsActivityTitle();
+        if (title != "none") {
+            mTalentsPresenter.setTalentsTitle(title);
+        } else {
+            ((TextView) findViewById(R.id.talents_a_bar_title)).setText(R.string.talents_a_bar_title_text);
+        }
 
         mTalentsPresenter.loadStage(false);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(SAVED_ACTIVITY_TITLE, mTalentsPresenter.getTalentsTitle());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String savedTitle = savedInstanceState.getString(SAVED_ACTIVITY_TITLE);
+        mTalentsPresenter.setTalentsTitle(savedTitle);
     }
 
     @Override
@@ -68,5 +89,34 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
     @Override
     public TalentsContract.TalentsPresenter getTalentsPresenter() {
         return mTalentsPresenter;
+    }
+
+    @Override
+    public View findOnTalentsViewById(int id) {
+        return findViewById(id);
+    }
+
+    @Override
+    public Resources getTalentsViewResources() {
+        return getResources();
+    }
+
+    @Override
+    public String getTalentsTitle() {
+        TextView  title =  findViewById(R.id.talents_a_bar_title);
+        return title.getText().toString();
+    }
+
+    @Override
+    public void setTalentsTitle(String newTitle) {
+        TextView  title =  findViewById(R.id.talents_a_bar_title);
+        title.setText(newTitle.subSequence(0, newTitle.length()));
+    }
+
+    @Override
+    protected void onDestroy() {
+        String title = mTalentsPresenter.getTalentsTitle();
+        mTalentsPresenter.getSettingRepository().setTalentsActivityTitle(title);
+        super.onDestroy();
     }
 }

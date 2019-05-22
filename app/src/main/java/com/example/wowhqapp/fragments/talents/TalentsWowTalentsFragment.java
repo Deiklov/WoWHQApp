@@ -66,8 +66,11 @@ public class TalentsWowTalentsFragment extends Fragment {
                 public void onClick(View v) {
                     // TextView idView = v.findViewById(R.id.fragment_talents_wow_talent_elem_id);
                     int id = Integer.parseInt(mIdView.getText().toString());
-
                     mTalentsPresenter.getSettingRepository().setTalentsWowTalentId(id);
+
+                    String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
+                    mTalentsPresenter.setTalentsTitle(title);
+
                     mTalentsPresenter.loadStage(false);
                 }
             });

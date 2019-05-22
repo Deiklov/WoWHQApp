@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
+import android.widget.TextView;
 
+import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.fragments.talents.TalentsWowClassesFragment;
@@ -57,6 +59,9 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
         mSettingRepository.setTalentsWowSpecId(-1);
         mSettingRepository.setTalentsWowSpecOrder(-1);
         mSettingRepository.setTalentsWowTalentId(-1);
+
+        String defaultTitle = mTalentsView.getTalentsViewResources().getString(R.string.talents_a_bar_title_text);
+        setTalentsTitle(defaultTitle);
     }
 
     @Override
@@ -101,6 +106,18 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
             mTalentsView.loadFragment(selectFragment(), needAddToBackStack);
         }
 
+    }
+
+    @Override
+    public String getTalentsTitle() {
+         TextView title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
+        return title.getText().toString();
+    }
+
+    @Override
+    public void setTalentsTitle(String newTitle) {
+        TextView  title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
+        title.setText(newTitle.subSequence(0, newTitle.length()));
     }
 
 }

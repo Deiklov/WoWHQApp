@@ -44,6 +44,8 @@ public interface MainContract {
         void setTalentsWowSpecOrder(int wowSpecOrder);
         int getTalentsWowTalentId();
         void setTalentsWowTalentId(int wowTalentId);
+        String getTalentsActivityTitle();
+        void setTalentsActivityTitle(String wowTalentId);
     }
     interface SettingPresenter{
         String getSlug();

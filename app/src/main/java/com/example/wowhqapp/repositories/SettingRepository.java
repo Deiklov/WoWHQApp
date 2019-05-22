@@ -22,6 +22,8 @@ public class SettingRepository implements MainContract.SettingRepository {
     private static final String TALENTS_WOWSPEC_ID = "Talents_wowSpec_id";
     private static final String TALENTS_WOWSPEC_ORDER = "Talents_wowSpec_order";
     private static final String TALENTS_WOWTALENT_ID = "Talents_wowTalent_id";
+    private static final String TALENTS_ACTIVITY_TITLE_STATE = "TALENTS_ACTIVITY_TITLE_STATE";
+
 
 
 
@@ -154,6 +156,17 @@ public class SettingRepository implements MainContract.SettingRepository {
     @Override
     public void setTalentsWowTalentId(int wowTalentId) {
         mEditor.putInt(TALENTS_WOWTALENT_ID, wowTalentId);
+        mEditor.apply();
+    }
+
+    @Override
+    public String getTalentsActivityTitle() {
+        return mPreferences.getString(TALENTS_ACTIVITY_TITLE_STATE, "none");
+    }
+
+    @Override
+    public void setTalentsActivityTitle(String activityTitle) {
+        mEditor.putString(TALENTS_ACTIVITY_TITLE_STATE, activityTitle);
         mEditor.apply();
     }
 }

@@ -77,6 +77,10 @@ public class TalentsWowSpecsFragment extends Fragment {
 
                     mTalentsPresenter.getSettingRepository().setTalentsWowSpecId(id);
                     mTalentsPresenter.getSettingRepository().setTalentsWowSpecOrder(order);
+
+                    String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
+                    mTalentsPresenter.setTalentsTitle(title);
+
                     mTalentsPresenter.loadStage(false);
                 }
             });

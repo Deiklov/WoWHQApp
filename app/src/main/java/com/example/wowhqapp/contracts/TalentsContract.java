@@ -1,8 +1,10 @@
 package com.example.wowhqapp.contracts;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
+import android.view.View;
 
 import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
@@ -25,11 +27,17 @@ public interface TalentsContract {
         void resetProgress();
         TalentsRepository getTalentsRepository();
         MainContract.SettingRepository getSettingRepository();
+        String getTalentsTitle();
+        void setTalentsTitle(String newTitle);
         int[] fillColorsTemp();
     }
 
     public interface TalentsView {
+        Resources getTalentsViewResources();
+        View findOnTalentsViewById(int id);
         void loadFragment(Fragment fragment, boolean needAddToBackStack);
         TalentsPresenter getTalentsPresenter();
+        String getTalentsTitle();
+        void setTalentsTitle(String newTitle);
     }
 }

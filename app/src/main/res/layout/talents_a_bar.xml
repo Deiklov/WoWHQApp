@@ -13,6 +13,6 @@
         android:id="@+id/talents_a_bar_title"
         android:text="@string/set_this_text_from_resource"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="12sp" />
 
 </LinearLayout>
