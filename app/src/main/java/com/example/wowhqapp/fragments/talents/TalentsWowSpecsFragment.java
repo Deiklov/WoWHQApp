@@ -1,7 +1,5 @@
 package com.example.wowhqapp.fragments.talents;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.databases.entity.WowSpec;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalentsWowSpecsFragment extends Fragment {
+    private TalentsContract.TalentsView mTalentsView;
     private TalentsContract.TalentsPresenter mTalentsPresenter;
     private TalentsWowSpecsFragment.TalentsWowSpecsAdapter mWowSpecsAdapter;
 
@@ -31,7 +32,8 @@ public class TalentsWowSpecsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_obj_list, container, false);
-        mTalentsPresenter = ((TalentsContract.TalentsView) getActivity()).getTalentsPresenter(); // TODO
+        mTalentsView = (TalentsContract.TalentsView) getActivity();
+        mTalentsPresenter = mTalentsView.getTalentsPresenter(); // TODO
 
         RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_obj_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(fragmentView.getContext()));
@@ -78,8 +80,8 @@ public class TalentsWowSpecsFragment extends Fragment {
                     mTalentsPresenter.getSettingRepository().setTalentsWowSpecId(id);
                     mTalentsPresenter.getSettingRepository().setTalentsWowSpecOrder(order);
 
-                    String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
-                    mTalentsPresenter.setTalentsTitle(title);
+                    String title = mTalentsView.getTalentsTitle() +" | " + mNameView.getText();
+                    mTalentsView.setTalentsTitle(title);
 
                     mTalentsPresenter.loadStage(false);
                 }
@@ -89,10 +91,10 @@ public class TalentsWowSpecsFragment extends Fragment {
 
     class TalentsWowSpecsAdapter extends RecyclerView.Adapter<TalentsWowSpecsViewHolder> {
         private List<WowSpec> mWowSpecs;
-        private Bitmap mBitmap;
+        // private Bitmap mBitmap;
 
         TalentsWowSpecsAdapter() {
-            mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
+            // mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
             mWowSpecs = new ArrayList<>();
         }
 
@@ -117,10 +119,22 @@ public class TalentsWowSpecsFragment extends Fragment {
             talentsWowSpecsViewHolder.mNameView.setText(wowSpec.getName());
             talentsWowSpecsViewHolder.mDescriptionView.setText(wowSpec.getDescription());
 
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
-            talentsWowSpecsViewHolder.mImageView.setBackground(bitmapDrawable);
+            // BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
+            // talentsWowSpecsViewHolder.mImageView.setBackground(bitmapDrawable);
+
+            Glide.with(getContext())
+                    .load(createImageUrl(wowSpec))
+                    .placeholder(R.drawable.question_mark_56)
+                    .timeout(3000)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(talentsWowSpecsViewHolder.mImageView);
+
 
             Log.d("TAG", "binding element at position " + i);
+        }
+
+        private String createImageUrl(WowSpec wowSpec) {
+            return "http://media.blizzard.com/wow/icons/56/" + wowSpec.getIcon() + ".jpg";
         }
 
         @Override

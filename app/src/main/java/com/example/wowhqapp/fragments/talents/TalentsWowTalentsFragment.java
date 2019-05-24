@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.databases.entity.Talent;
@@ -64,13 +66,8 @@ public class TalentsWowTalentsFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TextView idView = v.findViewById(R.id.fragment_talents_wow_talent_elem_id);
                     int id = Integer.parseInt(mIdView.getText().toString());
                     mTalentsPresenter.getSettingRepository().setTalentsWowTalentId(id);
-
-                    // String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
-                    // mTalentsPresenter.setTalentsTitle(title);
-
                     mTalentsPresenter.loadStage(false);
                 }
             });
@@ -107,8 +104,19 @@ public class TalentsWowTalentsFragment extends Fragment {
             BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
             talentsWowTalentViewHolder.mImageView.setBackground(bitmapDrawable);
 
+            /*Glide.with(getContext())
+                    .load(createImageUrl(wowSpec))
+                    .placeholder(R.drawable.question_mark_24)
+                    .timeout(3000)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(talentsWowSpecsViewHolder.mImageView);
+            */
             Log.d("TAG", "binding element at position " + i);
         }
+
+        /*private String createImageUrl(Talent wowTalent) {
+            return "http://media.blizzard.com/wow/icons/56/" + talent.getIcon() + ".jpg";
+        }*/
 
         @Override
         public int getItemCount() {

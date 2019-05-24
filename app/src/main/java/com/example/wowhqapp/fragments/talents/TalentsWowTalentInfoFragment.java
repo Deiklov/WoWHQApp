@@ -11,12 +11,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wowhqapp.R;
-import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.databases.entity.Talent;
 
 public class TalentsWowTalentInfoFragment extends Fragment {
-    private final String CURRENT_TALENT_ID = "CURRENT_TALENT_ID";
+    // private final String CURRENT_TALENT_ID = "CURRENT_TALENT_ID";
     private TalentsContract.TalentsPresenter mTalentsPresenter;
     private int mCurrentTalentId;
     private View mFragmentView;

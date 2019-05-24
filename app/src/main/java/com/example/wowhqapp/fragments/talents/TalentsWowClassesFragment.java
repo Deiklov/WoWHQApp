@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TalentsWowClassesFragment extends Fragment {
+    private TalentsContract.TalentsView mTalentsView;
     private TalentsContract.TalentsPresenter mTalentsPresenter;
     private TalentsWowClassesAdapter mWowClassesAdapter;
 
@@ -32,7 +33,9 @@ public class TalentsWowClassesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_talents_wow_obj_list, container, false);
-        mTalentsPresenter = ((TalentsContract.TalentsView) getActivity()).getTalentsPresenter(); // TODO
+
+        mTalentsView = (TalentsContract.TalentsView) getActivity();
+        mTalentsPresenter = mTalentsView.getTalentsPresenter(); // TODO
 
         RecyclerView recyclerView = fragmentView.findViewById(R.id.talents_recycler_view_wow_obj_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(fragmentView.getContext()));
@@ -61,12 +64,11 @@ public class TalentsWowClassesFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TextView idView = v.findViewById(R.id.fragment_talents_wow_class_elem_id);
                     int id = Integer.parseInt(mIdView.getText().toString());
                     mTalentsPresenter.getSettingRepository().setTalentsWowClassId(id);
 
-                    String title = mTalentsPresenter.getTalentsTitle() +" | " + mNameView.getText();
-                    mTalentsPresenter.setTalentsTitle(title);
+                    String title = mTalentsView.getTalentsTitle() +" | " + mNameView.getText();
+                    mTalentsView.setTalentsTitle(title);
 
                     mTalentsPresenter.loadStage(false);
                 }
@@ -100,11 +102,11 @@ public class TalentsWowClassesFragment extends Fragment {
 
             talentsWowClassesViewHolder.mIdView.setText(Integer.toString(wowClass.getId()));
             talentsWowClassesViewHolder.mNameView.setText(wowClass.getName());
+
             BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
+            talentsWowClassesViewHolder.mImageView.setBackground(bitmapDrawable);
 
             Log.d("TAG", "binding element at position " + i);
-
-            talentsWowClassesViewHolder.mImageView.setBackground(bitmapDrawable);
         }
 
         @Override

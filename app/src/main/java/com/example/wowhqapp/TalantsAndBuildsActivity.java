@@ -54,7 +54,7 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
 
         String title = mTalentsPresenter.getSettingRepository().getTalentsActivityTitle();
         if (title != "none") {
-            mTalentsPresenter.setTalentsTitle(title);
+            setTalentsTitle(title);
         } else {
             ((TextView) findViewById(R.id.talents_a_bar_title)).setText(R.string.talents_a_bar_title_text);
         }
@@ -65,14 +65,14 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(SAVED_ACTIVITY_TITLE, mTalentsPresenter.getTalentsTitle());
+        outState.putString(SAVED_ACTIVITY_TITLE, getTalentsTitle());
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         String savedTitle = savedInstanceState.getString(SAVED_ACTIVITY_TITLE);
-        mTalentsPresenter.setTalentsTitle(savedTitle);
+        setTalentsTitle(savedTitle);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class TalantsAndBuildsActivity extends AppCompatActivity implements Talen
 
     @Override
     protected void onDestroy() {
-        String title = mTalentsPresenter.getTalentsTitle();
+        String title = getTalentsTitle();
         mTalentsPresenter.getSettingRepository().setTalentsActivityTitle(title);
         super.onDestroy();
     }

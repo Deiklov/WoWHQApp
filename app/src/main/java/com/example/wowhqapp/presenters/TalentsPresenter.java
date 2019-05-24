@@ -61,7 +61,7 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
         mSettingRepository.setTalentsWowTalentId(-1);
 
         String defaultTitle = mTalentsView.getTalentsViewResources().getString(R.string.talents_a_bar_title_text);
-        setTalentsTitle(defaultTitle);
+        mTalentsView.setTalentsTitle(defaultTitle);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
 
     }
 
-    @Override
+    /*@Override
     public String getTalentsTitle() {
          TextView title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
         return title.getText().toString();
@@ -118,6 +118,6 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
     public void setTalentsTitle(String newTitle) {
         TextView  title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
         title.setText(newTitle.subSequence(0, newTitle.length()));
-    }
+    }*/
 
 }

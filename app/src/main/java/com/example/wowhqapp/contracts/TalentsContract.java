@@ -29,8 +29,8 @@ public interface TalentsContract {
         void resetProgress();
         TalentsRepository getTalentsRepository();
         MainContract.SettingRepository getSettingRepository();
-        String getTalentsTitle();
-        void setTalentsTitle(String newTitle);
+        // String getTalentsTitle();
+        // void setTalentsTitle(String newTitle);
         int[] fillColorsTemp();
     }
 
