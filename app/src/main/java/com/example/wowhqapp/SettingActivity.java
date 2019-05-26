@@ -28,7 +28,7 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        mSettingPresenter.MenuItemSelected();
+        mSettingPresenter.onMenuItemSelected();
         return true;
     }
 
@@ -60,7 +60,7 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] choose = getResources().getStringArray(R.array.regions);
-                mSettingPresenter.setRegion(choose[position]);
+                mSettingPresenter.onRegionSelect(choose[position]);
             }
 
             @Override
@@ -72,18 +72,19 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] choose = getResources().getStringArray(R.array.langs);
-                mSettingPresenter.setLang(choose[position]);
+                mSettingPresenter.onLangSelect(choose[position]);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
         mSlugSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String[] choose = getResources().getStringArray(R.array.slugs);
-                mSettingPresenter.setSlug(choose[position]);
+                mSettingPresenter.onSlugSelect(choose[position]);
             }
 
             @Override

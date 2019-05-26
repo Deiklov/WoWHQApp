@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.MainContract;
-import com.example.wowhqapp.databases.entity.Lot;
+import com.example.wowhqapp.databases.entity.SimpleLot;
 import com.example.wowhqapp.fragments.auctions.dummy.DummyContent;
 import com.example.wowhqapp.fragments.auctions.dummy.DummyContent.DummyItem;
 
@@ -96,8 +96,8 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     }
 
     @Override
-    public void initAdapter(List<Lot> lotList) {
-        //Потом тут будет установка не DummyContent, а lotList
+    public void initAdapter(List<SimpleLot> simpleLotList) {
+        //Потом тут будет установка не DummyContent, а simpleLotList
         mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(DummyContent.ITEMS, mListener);
         mRecyclerView.setAdapter(mAuctionListRecyclerViewAdapter);
 

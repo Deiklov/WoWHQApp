@@ -1,6 +1,6 @@
 package com.example.wowhqapp.contracts;
 
-import com.example.wowhqapp.databases.entity.Lot;
+import com.example.wowhqapp.databases.entity.SimpleLot;
 
 import java.util.List;
 
@@ -50,16 +50,15 @@ public interface MainContract {
         void setTalentsWowTalentId(int wowTalentId);
         String getTalentsActivityTitle();
         void setTalentsActivityTitle(String wowTalentId);
+
+        void deleteAllSimpleLots();
     }
     interface SettingPresenter{
-        String getSlug();
-        String getRegion();
-        String getLang();
         void init();
-        void setSlug(String value);
-        void setRegion(String value);
-        void setLang(String value);
-        void MenuItemSelected();
+        void onSlugSelect(String value);
+        void onRegionSelect(String value);
+        void onLangSelect(String value);
+        void onMenuItemSelected();
     }
     interface SettingView{
         void SetSpinnerValues(String slug, String region, String lang);
@@ -80,17 +79,17 @@ public interface MainContract {
         void setTitle(String txt);
         void setFragment(Boolean type);
         //Туда и в его коллегу передаем список лотов
-        void initAdapter(List<Lot> lotList);
+        void initAdapter(List<SimpleLot> simpleLotList);
         void notifyAuctionsChange();
     }
 
     interface AuctionsListFragView{
-        void initAdapter(List<Lot> lotList);
+        void initAdapter(List<SimpleLot> simpleLotList);
         void notifyAuctionsChange();
     }
 
     interface AuctionsRepo{
-        List<Lot> getLots();
+        List<SimpleLot> getLots();
         void downloadLots(int page);
         void deleteAllLots();
         void destroy();

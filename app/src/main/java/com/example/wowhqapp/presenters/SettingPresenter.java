@@ -13,56 +13,40 @@ public class SettingPresenter implements MainContract.SettingPresenter {
         mSettingView = settingView;
     }
 
-    @Override
-    public String getSlug() {
-        String slug = mSettingRepository.getSlug();
-        if (slug == "no slug"){
-            return null;
-        }
-        return slug;
-    }
-
-    @Override
-    public String getRegion() {
-        String region = mSettingRepository.getRegion();
-        if (region == "no region"){
-            return null;
-        }
-        return region;
-    }
-
-    @Override
-    public String getLang() {
-        String lang = mSettingRepository.getLang();
-        if (lang == "no lang"){
-            return null;
-        }
-        return lang;
-    }
 
     @Override
     public void init() {
-        mSettingView.SetSpinnerValues(getSlug(), getRegion(), getLang());
+        mSettingView.SetSpinnerValues(mSettingRepository.getSlug(), mSettingRepository.getRegion(), mSettingRepository.getLang());
     }
 
     @Override
-    public void setSlug(String value) {
+    public void onSlugSelect(String value) {
+        if (!mSettingRepository.getSlug().equals(value)){
+            mSettingRepository.deleteAllSimpleLots();
+        }
         mSettingRepository.setSlug(value);
     }
 
     @Override
-    public void setRegion(String value) {
+    public void onRegionSelect(String value) {
+        if (!mSettingRepository.getRegion().equals(value)){
+            mSettingRepository.deleteAllSimpleLots();
+        }
         mSettingRepository.setRegion(value);
     }
 
     @Override
-    public void setLang(String value) {
+    public void onLangSelect(String value) {
+        if (!mSettingRepository.getLang().equals(value)){
+            mSettingRepository.deleteAllSimpleLots();
+        }
         mSettingRepository.setLang(value);
     }
 
     @Override
-    public void MenuItemSelected() {
+    public void onMenuItemSelected() {
         mSettingView.CloseSetting();
     }
+
 
 }

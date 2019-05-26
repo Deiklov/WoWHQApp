@@ -1,10 +1,18 @@
 package com.example.wowhqapp.repositories;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.example.wowhqapp.WowhqApplication;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.databases.dao.AuctionsDao;
+
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 
 public class SettingRepository implements MainContract.SettingRepository {
 
@@ -40,12 +48,12 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public String getSlug() {
-        return mPreferences.getString(SLUG, "no slug");
+        return mPreferences.getString(SLUG, "uther");
     }
 
     @Override
     public void setSlug(String value) {
-        mAuctionsDao.deleteAll();
+        //mAuctionsDao.deleteAll();
         mEditor.putString(SLUG, value);
         mEditor.apply();
     }
@@ -57,19 +65,19 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public void setRegion(String value) {
-        mAuctionsDao.deleteAll();
+        //mAuctionsDao.deleteAll();
         mEditor.putString(REGION, value);
         mEditor.apply();
     }
 
     @Override
     public String getLang() {
-        return mPreferences.getString(LANG, "no lang");
+        return mPreferences.getString(LANG, "ru");
     }
 
     @Override
     public void setLang(String value) {
-        mAuctionsDao.deleteAll();
+        //mAuctionsDao.deleteAll();
         mEditor.putString(LANG, value);
         mEditor.apply();
     }
@@ -176,5 +184,34 @@ public class SettingRepository implements MainContract.SettingRepository {
     public void setTalentsActivityTitle(String activityTitle) {
         mEditor.putString(TALENTS_ACTIVITY_TITLE_STATE, activityTitle);
         mEditor.apply();
+    }
+
+    @Override
+    public void deleteAllSimpleLots() {
+        Log.v(WowhqApplication.LOG_TAG, "deleteAllSimpleLots");
+
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                mAuctionsDao.deleteAll();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new CompletableObserver() {
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.v(WowhqApplication.LOG_TAG, "deleteAllSimpleLots - onSubscribe");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.v(WowhqApplication.LOG_TAG, "Удалены все простые лоты");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.v(WowhqApplication.LOG_TAG, "deleteAllSimpleLots - onError");
+
+            }
+        });
     }
 }

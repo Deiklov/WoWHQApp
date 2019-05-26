@@ -9,9 +9,17 @@ import com.example.wowhqapp.databases.database.AucAndTokenDataBase;
 import com.example.wowhqapp.databases.entity.WoWToken;
 import com.example.wowhqapp.network.AucAndTokenNetwork;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.lang.Thread.currentThread;
 
 public class WoWTokenServiceRepo implements MainContract.TokenServiceRepository {
 
@@ -52,7 +60,7 @@ public class WoWTokenServiceRepo implements MainContract.TokenServiceRepository 
                             e.printStackTrace();
                         }
                         Log.v(WowhqApplication.LOG_TAG, "Данные токена, МОДИФИЦИРОВАННЫЕ: Регион: " + woWToken.getRegion() + "Текущая цена: " + woWToken.getCurrentPriceBlizzardApi());
-                        mWoWTokenDao.insert(woWToken);
+                        insertWoWToken(woWToken);
                         setCurrentPice(woWToken.getCurrentPriceBlizzardApi());
                     }
 
@@ -76,5 +84,30 @@ public class WoWTokenServiceRepo implements MainContract.TokenServiceRepository 
         current_price = currentPice;
         Log.v(WowhqApplication.LOG_TAG, "[NOTYFICATION_DEBUG]Текущая цена по версии Repo, при попытке установить ее в поле (Service): "+String.valueOf(current_price));
 
+    }
+    private void insertWoWToken(final WoWToken woWToken){
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                mWoWTokenDao.insert(woWToken);
+                Log.v(WowhqApplication.LOG_TAG, "ДобавлЯЕМ в БД WoWToken, поток: " + currentThread().getName());
+
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.v(WowhqApplication.LOG_TAG, "ДобавлИЛИ в БД WoWToken, поток: " + currentThread().getName());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 }

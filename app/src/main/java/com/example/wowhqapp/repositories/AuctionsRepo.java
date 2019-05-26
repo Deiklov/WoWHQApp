@@ -3,7 +3,7 @@ package com.example.wowhqapp.repositories;
 import com.example.wowhqapp.WowhqApplication;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.databases.dao.AuctionsDao;
-import com.example.wowhqapp.databases.entity.Lot;
+import com.example.wowhqapp.databases.entity.SimpleLot;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import io.reactivex.functions.Consumer;
 public class AuctionsRepo implements MainContract.AuctionsRepo {
 
     private AuctionsDao mAuctionsDao;
-    private List<Lot> mListLot;
+    private List<SimpleLot> mListSimpleLot;
     private String mSlug;
     private String mRegion;
     private String mLang;
@@ -31,11 +31,11 @@ public class AuctionsRepo implements MainContract.AuctionsRepo {
 
         mCompositeDisposable.add(
                 mAuctionsDao.getAll().observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<List<Lot>>() {
+                        .subscribe(new Consumer<List<SimpleLot>>() {
                             @Override
-                            public void accept(List<Lot> lots) throws Exception {
-                                mListLot = lots;
-                                if (mListLot.size() < 10){
+                            public void accept(List<SimpleLot> simpleLots) throws Exception {
+                                mListSimpleLot = simpleLots;
+                                if (mListSimpleLot.size() < 10){
                                     mAuctionsPresenter.notifyLittleData();
                                 }
                                 else {
@@ -47,8 +47,8 @@ public class AuctionsRepo implements MainContract.AuctionsRepo {
     }
 
     @Override
-    public List<Lot> getLots() {
-        return mListLot;
+    public List<SimpleLot> getLots() {
+        return mListSimpleLot;
     }
 
     @Override

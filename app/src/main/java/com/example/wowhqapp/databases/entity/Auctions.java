@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Auctions {
 
-    @Json(name = "lots")
-    private List<Lot> lots = null;
+    @Json(name = "simpleLots")
+    private List<SimpleLot> simpleLots = null;
 
     /**
      * No args constructor for use in serialization
@@ -18,19 +18,19 @@ public class Auctions {
 
     /**
      *
-     * @param lots
+     * @param simpleLots
      */
-    public Auctions(List<Lot> lots) {
+    public Auctions(List<SimpleLot> simpleLots) {
         super();
-        this.lots = lots;
+        this.simpleLots = simpleLots;
     }
 
-    public List<Lot> getLots() {
-        return lots;
+    public List<SimpleLot> getSimpleLots() {
+        return simpleLots;
     }
 
-    public void setLots(List<Lot> lots) {
-        this.lots = lots;
+    public void setSimpleLots(List<SimpleLot> simpleLots) {
+        this.simpleLots = simpleLots;
     }
 
 }
