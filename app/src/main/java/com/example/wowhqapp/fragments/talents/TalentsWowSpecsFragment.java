@@ -123,7 +123,7 @@ public class TalentsWowSpecsFragment extends Fragment {
             // talentsWowSpecsViewHolder.mImageView.setBackground(bitmapDrawable);
 
             Glide.with(getContext())
-                    .load(createImageUrl(wowSpec))
+                    .load(mTalentsPresenter.createImageUrl(wowSpec))
                     .placeholder(R.drawable.question_mark_56)
                     .timeout(3000)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -131,10 +131,6 @@ public class TalentsWowSpecsFragment extends Fragment {
 
 
             Log.d("TAG", "binding element at position " + i);
-        }
-
-        private String createImageUrl(WowSpec wowSpec) {
-            return "http://media.blizzard.com/wow/icons/56/" + wowSpec.getIcon() + ".jpg";
         }
 
         @Override

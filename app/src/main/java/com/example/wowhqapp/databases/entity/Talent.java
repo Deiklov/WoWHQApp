@@ -20,7 +20,7 @@ import com.squareup.moshi.Json;
                 childColumns = "specId"
         )
 )
-public class Talent implements IEntity {
+public class Talent implements ITalentsEntity {
     @PrimaryKey
     @Json(name = "id")
     private int id;
@@ -45,6 +45,8 @@ public class Talent implements IEntity {
     private int row;
     @Json(name = "col")
     private int col;
+    @Json(name = "icon")
+    private String icon;
 
     /**
      * No args constructor for use in serialization
@@ -63,11 +65,12 @@ public class Talent implements IEntity {
      * @param powerCost
      * @param cooldown
      * @param row
+     * @param icon
      */
     @Ignore
     public Talent(int id, int specId, @NonNull String name,
                   @NonNull String description, @NonNull String castTime, String range,
-                  String powerCost, String cooldown, int row, int col) {
+                  String powerCost, String cooldown, int row, int col, String icon) {
         super();
         this.id = id;
         this.specId = specId;
@@ -79,6 +82,7 @@ public class Talent implements IEntity {
         this.cooldown = cooldown;
         this.row = row;
         this.col = col;
+        this.icon = icon;
     }
 
     @Override
@@ -167,4 +171,15 @@ public class Talent implements IEntity {
     public void setCol(int col) {
         this.col = col;
     }
+
+    @Override
+    public String getIcon() {
+        return icon;
+    }
+
+    @Override
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
 }

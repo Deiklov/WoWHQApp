@@ -1,7 +1,5 @@
 package com.example.wowhqapp.fragments.talents;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.databases.entity.WowClass;
@@ -78,10 +78,10 @@ public class TalentsWowClassesFragment extends Fragment {
 
     class TalentsWowClassesAdapter extends RecyclerView.Adapter<TalentsWowClassesViewHolder> {
         private List<WowClass> mWowClasses;
-        private Bitmap mBitmap;
+        // private Bitmap mBitmap;
 
         TalentsWowClassesAdapter() {
-            mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
+            // mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
             mWowClasses = new ArrayList<>();
         }
 
@@ -103,8 +103,15 @@ public class TalentsWowClassesFragment extends Fragment {
             talentsWowClassesViewHolder.mIdView.setText(Integer.toString(wowClass.getId()));
             talentsWowClassesViewHolder.mNameView.setText(wowClass.getName());
 
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
-            talentsWowClassesViewHolder.mImageView.setBackground(bitmapDrawable);
+            // BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
+            // talentsWowClassesViewHolder.mImageView.setBackground(bitmapDrawable);
+
+            Glide.with(getContext())
+                    .load(mTalentsPresenter.createImageUrl(wowClass))
+                    .placeholder(R.drawable.question_mark_56)
+                    .timeout(3000)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(talentsWowClassesViewHolder.mImageView);
 
             Log.d("TAG", "binding element at position " + i);
         }

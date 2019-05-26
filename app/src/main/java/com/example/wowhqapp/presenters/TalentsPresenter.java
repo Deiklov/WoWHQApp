@@ -4,11 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
-import android.widget.TextView;
 
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.contracts.TalentsContract;
+import com.example.wowhqapp.databases.entity.ITalentsEntity;
 import com.example.wowhqapp.fragments.talents.TalentsWowClassesFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowSpecsFragment;
 import com.example.wowhqapp.fragments.talents.TalentsWowTalentInfoFragment;
@@ -38,8 +38,6 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
     public Fragment selectFragment() {
         if (mSettingRepository.getTalentsWowTalentId() != -1) {
             return new TalentsWowTalentInfoFragment();
-            // TODO(nickeskov): не забюыть сбросить значение
-            //  выбранного таланта в констркуторе фрагмента TalentsWowTalentInfoFragment
 
         } else if (mSettingRepository.getTalentsWowSpecId() != -1 &&
             mSettingRepository.getTalentsWowSpecOrder() != -1
@@ -75,21 +73,18 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
     }
 
     @Override
-    public int[] fillColorsTemp() {
-        int[] ints = new int[40000];
-        Random random = new Random();
-        for (int j = 0; j < ints.length; j++) {
-            ints[j] = Color.rgb(random.nextInt(255), random.nextInt(255), random.nextInt(255));
-        }
-        return ints;
+    public String createImageUrl(ITalentsEntity iTalentsEntity) {
+        return "http://media.blizzard.com/wow/icons/56/" + iTalentsEntity.getIcon() + ".jpg";
     }
 
     class TalentsPresenterAsyncLoader extends AsyncTask<Boolean, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Boolean... booleans) {
             String oldTalentLang = mSettingRepository.getTalentsLang();
-            if (mSettingRepository.getLang() != oldTalentLang) {
-                mSettingRepository.setTalentsLang(mSettingRepository.getLang());
+            String currentLang = mSettingRepository.getLang();
+            if (!currentLang.equals("no lang") &&
+                    !currentLang.equals(oldTalentLang)) {
+                mSettingRepository.setTalentsLang(currentLang);
                 try {
                     mTalentsRepository.refresh();
                 } catch (IOException e) {
@@ -107,17 +102,4 @@ public class TalentsPresenter implements TalentsContract.TalentsPresenter {
         }
 
     }
-
-    /*@Override
-    public String getTalentsTitle() {
-         TextView title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
-        return title.getText().toString();
-    }
-
-    @Override
-    public void setTalentsTitle(String newTitle) {
-        TextView  title = (TextView) mTalentsView.findOnTalentsViewById(R.id.talents_a_bar_title);
-        title.setText(newTitle.subSequence(0, newTitle.length()));
-    }*/
-
 }

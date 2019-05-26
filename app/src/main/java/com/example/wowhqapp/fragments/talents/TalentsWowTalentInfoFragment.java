@@ -8,8 +8,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.TalentsContract;
 import com.example.wowhqapp.databases.entity.Talent;
@@ -64,9 +67,16 @@ public class TalentsWowTalentInfoFragment extends Fragment {
 
             TextView nameView = mFragmentView.findViewById(R.id.fragment_talents_wow_talent_info_name);
             TextView descriptionView = mFragmentView.findViewById(R.id.fragment_talents_wow_talent_info_description);
+            ImageView imageView = mFragmentView.findViewById(R.id.fragment_talents_wow_talent_info_img);
 
             nameView.setText(talent.getName());
             descriptionView.setText(talent.getDescription());
+            Glide.with(getContext())
+                    .load(mTalentsPresenter.createImageUrl(talent))
+                    .placeholder(R.drawable.question_mark_56)
+                    .timeout(3000)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
         }
     }
 }

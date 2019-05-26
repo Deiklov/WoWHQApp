@@ -20,7 +20,7 @@ import com.squareup.moshi.Json;
                 childColumns = "classId"
         )
 )
-public class WowSpec implements IEntity {
+public class WowSpec implements ITalentsEntity {
     @Json(name = "class_id")
     private int classId;
     @PrimaryKey

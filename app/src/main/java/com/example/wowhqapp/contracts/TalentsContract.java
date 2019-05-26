@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.view.View;
 
+import com.example.wowhqapp.databases.entity.ITalentsEntity;
 import com.example.wowhqapp.databases.entity.Talent;
 import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
@@ -29,9 +30,7 @@ public interface TalentsContract {
         void resetProgress();
         TalentsRepository getTalentsRepository();
         MainContract.SettingRepository getSettingRepository();
-        // String getTalentsTitle();
-        // void setTalentsTitle(String newTitle);
-        int[] fillColorsTemp();
+        String createImageUrl(ITalentsEntity iTalentsEntity);
     }
 
     public interface TalentsView {

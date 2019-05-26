@@ -1,7 +1,5 @@
 package com.example.wowhqapp.fragments.talents;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -76,10 +74,10 @@ public class TalentsWowTalentsFragment extends Fragment {
 
     class TalentsWowTalentsAdapter extends RecyclerView.Adapter<TalentsWowTalentViewHolder> {
         private List<Talent> mWowTalentsList;
-        private Bitmap mBitmap;
+        // private Bitmap mBitmap;
 
         TalentsWowTalentsAdapter() {
-            mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
+            // mBitmap = Bitmap.createBitmap(mTalentsPresenter.fillColorsTemp(), 200, 200, Bitmap.Config.ARGB_8888);
             mWowTalentsList = new ArrayList<>();
         }
 
@@ -96,21 +94,21 @@ public class TalentsWowTalentsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull TalentsWowTalentViewHolder talentsWowTalentViewHolder, int i) {
-            Talent wowSpec = mWowTalentsList.get(i);
+            Talent wowTalent = mWowTalentsList.get(i);
 
-            talentsWowTalentViewHolder.mIdView.setText(Integer.toString(wowSpec.getId()));
-            talentsWowTalentViewHolder.mNameView.setText(wowSpec.getName());
+            talentsWowTalentViewHolder.mIdView.setText(Integer.toString(wowTalent.getId()));
+            talentsWowTalentViewHolder.mNameView.setText(wowTalent.getName());
 
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
-            talentsWowTalentViewHolder.mImageView.setBackground(bitmapDrawable);
+            // BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), mBitmap);
+            // talentsWowTalentViewHolder.mImageView.setBackground(bitmapDrawable);
 
-            /*Glide.with(getContext())
-                    .load(createImageUrl(wowSpec))
-                    .placeholder(R.drawable.question_mark_24)
+            Glide.with(getContext())
+                    .load(mTalentsPresenter.createImageUrl(wowTalent))
+                    .placeholder(R.drawable.question_mark_56)
                     .timeout(3000)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(talentsWowSpecsViewHolder.mImageView);
-            */
+                    .into(talentsWowTalentViewHolder.mImageView);
+
             Log.d("TAG", "binding element at position " + i);
         }
 

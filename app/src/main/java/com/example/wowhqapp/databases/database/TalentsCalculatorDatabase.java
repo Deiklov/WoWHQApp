@@ -12,7 +12,7 @@ import com.example.wowhqapp.databases.entity.Talent;
 import com.example.wowhqapp.databases.entity.WowClass;
 import com.example.wowhqapp.databases.entity.WowSpec;
 
-@Database(entities = {WowClass.class, WowSpec.class, Talent.class}, version = 1)
+@Database(entities = {WowClass.class, WowSpec.class, Talent.class}, version = 2)
 public abstract class TalentsCalculatorDatabase extends RoomDatabase {
 
     public abstract WowSpecDao getWowSpecsDao();
