@@ -1,32 +1,26 @@
 package com.example.wowhqapp.presenters;
 
-import android.util.Log;
-
-import com.example.wowhqapp.WowhqApplication;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.repositories.SettingRepository;
 import com.example.wowhqapp.repositories.WoWTokenServiceRepo;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePresenter {
 
 
     private SettingRepository mSettingRepository;
-    private MainContract.WoWTokenServiceView mWoWTokenServiceView;
+    private MainContract.WoWTokenService mWoWTokenService;
     private MainContract.TokenServiceRepository mTokenServiceRepository;
-    private boolean isThreadWork;
+//    private boolean isThreadWork;
     private long last_notification_price;
     private long target_price;
     private boolean target_price_sign;
     private boolean is_check_target_price;
-    private Timer mTokenScanerTimer;
+//    private Timer mTokenScanerTimer;
 
 
-    public WoWTokenServicePresenter(SettingRepository settingRepository, MainContract.WoWTokenServiceView woWTokenServiceView){
+    public WoWTokenServicePresenter(SettingRepository settingRepository, MainContract.WoWTokenService woWTokenService){
         mSettingRepository = settingRepository;
-        mWoWTokenServiceView = woWTokenServiceView;
+        mWoWTokenService = woWTokenService;
         mTokenServiceRepository = new WoWTokenServiceRepo(mSettingRepository.getRegion());
 
         //Больше/Меньше
@@ -38,35 +32,34 @@ public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePre
         //Т.к. если что-то изменится то произойдет рестарт сервиса и значение обновится
         is_check_target_price = mSettingRepository.getWoWTokenServiceEnable();
         //Запихнул его сюда т.к. нужно его еще и завершать
-        mTokenScanerTimer = new Timer();
+//        mTokenScanerTimer = new Timer();
     }
 
     @Override
-    public void init(boolean is_from_activity) {
-        if ((is_from_activity || mSettingRepository.getWoWTokenServiceEnable()) && !isThreadWork){ //Проверяем можноли работать сервису
-            isThreadWork = true;
-            mTokenScanerTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    scanWoWToken();
-                }
-            }, 100L, 8L*1000);
-        }
-        else{
-            mWoWTokenServiceView.stopService();
-        }
+    public boolean init() {
+        scanWoWToken();
+//        if ((is_from_activity || mSettingRepository.getWoWTokenServiceEnable()) && !isThreadWork){ //Проверяем можноли работать сервису
+//            isThreadWork = true;
+//            mTokenScanerTimer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    scanWoWToken();
+//                }
+//            }, 100L, 8L*1000);
+//        }
+//        else{
+//            mWoWTokenService.stopService();
+//        }
+        return true;
     }
 
     @Override
     public void destroy() {
-        mTokenScanerTimer.cancel();
+//        mTokenScanerTimer.cancel();
     }
 
     private void scanWoWToken(){
-        Log.v(WowhqApplication.LOG_TAG, "Вызван scanWoWToken");
-
         long current_price = mTokenServiceRepository.saveWoWTokenAndGetCurrentPrice();
-        Log.v(WowhqApplication.LOG_TAG, "[NOTYFICATION_DEBUG]Текущая цена по версии Presenter (Service): "+String.valueOf(current_price));
 
         //Смотрим, делать ли уведомление
         if (is_check_target_price && (last_notification_price != current_price) &&
@@ -74,8 +67,7 @@ public class WoWTokenServicePresenter implements MainContract.WoWTokenServicePre
                         || (target_price < current_price && target_price_sign)
                         || target_price == current_price)){
 
-            Log.v(WowhqApplication.LOG_TAG, "[NOTYFICATION_DEBUG]scanWoWToken одобрил отправку уведомления");
-            mWoWTokenServiceView.makeNotification(current_price, mSettingRepository.getRegion());
+            mWoWTokenService.makeNotification(current_price, mSettingRepository.getRegion());
             last_notification_price = current_price;
         }
     }

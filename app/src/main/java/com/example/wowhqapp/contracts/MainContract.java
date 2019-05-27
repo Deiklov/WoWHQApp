@@ -52,6 +52,9 @@ public interface MainContract {
         void setTalentsActivityTitle(String wowTalentId);
 
         void deleteAllSimpleLots();
+
+        void setTokenActivityStatus(Boolean enable);
+        Boolean getTokenActivityStatus();
     }
     interface SettingPresenter{
         void init();
@@ -99,20 +102,25 @@ public interface MainContract {
 
     //WoWToken
     interface WoWTokenView{
-        void startService();
-        void stopService();
+        void startJob();
         void setPrice(long min, long max, long current, long lastChange, int icon);
         void setBox(Boolean val);
         void setRadioBtn(Boolean val);
         void setTargetPriceEditText(long price);
+        void closeWoWToken();
+
+
     }
     interface WoWTokenPresenter{
         void initPrice();
-        void initTargetPriceAndStartService();
+        void initTargetPriceAndStartJob();
         void test_updateToken(int coef);
         void setServiceStatus(Boolean val);
         void setTargetPrice(Boolean val, long price);
         void destroy();
+        void onStop();
+        void onMenuItemSelected();
+
     }
     interface TokenRepository{
         void refreshMinMaxCurrent();
@@ -124,13 +132,13 @@ public interface MainContract {
         void destroy();
     }
     interface WoWTokenServicePresenter{
-        void init(boolean is_from_activity);
+        boolean init();
         void destroy();
     }
-    interface WoWTokenServiceView{
+    interface WoWTokenService {
         void makeNotification(long current_price, String region);
-        void stopService();
     }
+
     interface TokenServiceRepository{
         long saveWoWTokenAndGetCurrentPrice();
     }

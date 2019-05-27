@@ -13,7 +13,6 @@ public class SettingPresenter implements MainContract.SettingPresenter {
         mSettingView = settingView;
     }
 
-
     @Override
     public void init() {
         mSettingView.SetSpinnerValues(mSettingRepository.getSlug(), mSettingRepository.getRegion(), mSettingRepository.getLang());

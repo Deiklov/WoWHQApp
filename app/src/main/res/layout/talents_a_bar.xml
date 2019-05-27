@@ -14,5 +14,4 @@
         android:text="@string/set_this_text_from_resource"
         android:textColor="@color/white"
         android:textSize="12sp" />
-
 </LinearLayout>

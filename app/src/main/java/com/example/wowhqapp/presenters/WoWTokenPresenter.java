@@ -1,5 +1,8 @@
 package com.example.wowhqapp.presenters;
 
+import android.util.Log;
+
+import com.example.wowhqapp.WowhqApplication;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.repositories.SettingRepository;
 import com.example.wowhqapp.repositories.WoWTokenRepo;
@@ -23,12 +26,12 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
     }
 
     @Override
-    public void initTargetPriceAndStartService() {
+    public void initTargetPriceAndStartJob() {
         mWoWTokenView.setBox(mSettingRepository.getWoWTokenServiceEnable());
         mWoWTokenView.setRadioBtn(mSettingRepository.getTargetPriceSig());
         mWoWTokenView.setTargetPriceEditText(mSettingRepository.getTargetPrice());
-        mWoWTokenView.stopService();
-        mWoWTokenView.startService();
+        mSettingRepository.setTokenActivityStatus(true);
+        mWoWTokenView.startJob();
     }
 
     @Override
@@ -40,23 +43,31 @@ public class WoWTokenPresenter implements MainContract.WoWTokenPresenter {
     @Override
     public void setServiceStatus(Boolean val) {
         mSettingRepository.setWoWTokenServiceEnable(val);
-        mWoWTokenView.stopService();
-        mWoWTokenView.startService();
+        mWoWTokenView.startJob();
     }
 
     @Override
     public void setTargetPrice(Boolean val, long price) {
         mSettingRepository.setTargetPrice(price);
         mSettingRepository.setTargetPriceSig(val);
-        mWoWTokenView.stopService();
-        mWoWTokenView.startService();
+        mWoWTokenView.startJob();
     }
 
     @Override
     public void destroy() {
         mTokenRepository.destroy();
-        if (!mSettingRepository.getWoWTokenServiceEnable()) {
-            mWoWTokenView.stopService();
-        }
+
+    }
+
+    @Override
+    public void onStop() {
+        mSettingRepository.setTokenActivityStatus(false);
+        Log.v(WowhqApplication.LOG_TAG, "setTokenActivityStatus - " + mSettingRepository.getTokenActivityStatus());
+
+    }
+
+    @Override
+    public void onMenuItemSelected() {
+        mWoWTokenView.closeWoWToken();
     }
 }

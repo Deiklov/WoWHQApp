@@ -25,6 +25,8 @@ public class SettingRepository implements MainContract.SettingRepository {
     private static final String WoWTokenServiceEnable = "WoWTokenServiceEnable"; //Отвечает за следующее: слать ли уведомления, соответственно запускаться ли самостоятельно , рисование галочки
     private static final String TARGET_PRICE = "WoWTokenTargetPrice";
     private static final String TARGET_PRICE_SIGN = "WoWTokenTargetPrice_Sign";
+    private static final String TOKEN_ACTIVITY_STATUS = "TokenActivityStatus";
+
 
 
     private static final String TALENTS_LANG = "Talents_language";
@@ -53,7 +55,6 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public void setSlug(String value) {
-        //mAuctionsDao.deleteAll();
         mEditor.putString(SLUG, value);
         mEditor.apply();
     }
@@ -65,7 +66,6 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public void setRegion(String value) {
-        //mAuctionsDao.deleteAll();
         mEditor.putString(REGION, value);
         mEditor.apply();
     }
@@ -77,7 +77,6 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public void setLang(String value) {
-        //mAuctionsDao.deleteAll();
         mEditor.putString(LANG, value);
         mEditor.apply();
     }
@@ -213,5 +212,17 @@ public class SettingRepository implements MainContract.SettingRepository {
 
             }
         });
+    }
+
+    @Override
+    public void setTokenActivityStatus(Boolean enable) {
+        mEditor.putBoolean(TOKEN_ACTIVITY_STATUS, enable);
+        mEditor.apply();
+
+    }
+
+    @Override
+    public Boolean getTokenActivityStatus() {
+        return mPreferences.getBoolean(TOKEN_ACTIVITY_STATUS, false);
     }
 }
