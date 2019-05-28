@@ -14,6 +14,7 @@ import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.MainContract;
 import com.example.wowhqapp.databases.entity.Lot;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
 
     public static final String KEY_TYPE = "TYPE";
     private RecyclerView.OnScrollListener mOnScrollListener;
+    private LinearLayoutManager mLinearLayoutManager;
 
 
     //Можно генерить код на N колонок
@@ -33,6 +35,11 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     private OnListFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private AuctionListRecyclerViewAdapter mAuctionListRecyclerViewAdapter;
+    private Date mLastScrollDownDate;
+    private Date mLastScrollDownNotToEnd;
+    private Date mLastScrollUpDate;
+
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -49,6 +56,30 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 //http://qaru.site/questions/25851/how-to-implement-endless-list-with-recyclerview - TOP
                 //https://stackoverflow.com/questions/31000964/how-to-implement-setonscrolllistener-in-recyclerview
+                int totalItemCount = mLinearLayoutManager.getItemCount();
+                int firstVisibleItemPosition = mLinearLayoutManager.findFirstVisibleItemPosition();
+                int lastVisibleItemPosition = mLinearLayoutManager.findLastVisibleItemPosition();
+
+                if(dy > 0) //check for scroll down
+                {
+                    if (totalItemCount > 0)
+                        if ((totalItemCount - 1) == lastVisibleItemPosition && ((new Date().getTime() - mLastScrollDownDate.getTime())>200)) {
+                            mListener.onScrollDown();
+                            mLastScrollDownDate = new Date();
+                        }else if ((new Date().getTime() - mLastScrollDownNotToEnd.getTime())>200){
+                            mListener.onScrollDownNotToEnd();
+                            mLastScrollDownNotToEnd = new Date();
+                        }
+                }
+                if(dy < 0) //check for scroll up
+                {
+                    if (totalItemCount > 0)
+                        if (firstVisibleItemPosition >= 0 && (new Date().getTime() - mLastScrollDownNotToEnd.getTime())>200) {
+                            //Типо доскролили до верха
+                            mListener.onScrollUp();
+                            mLastScrollDownNotToEnd = new Date();
+                        }
+                }
                 super.onScrolled(recyclerView, dx, dy);
             }
         };
@@ -65,7 +96,8 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             mRecyclerView = (RecyclerView) view;
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+            mLinearLayoutManager = new LinearLayoutManager(context);
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
             mRecyclerView.addOnScrollListener(mOnScrollListener);
         }
         return view;
@@ -76,6 +108,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     public void onAttach(Context context) {
         super.onAttach(context);
         //Создаем слушателя нажатия на лот, реализованного в Activity
+        mLastScrollDownNotToEnd = mLastScrollDownDate = mLastScrollUpDate = new Date();
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
         } else {
@@ -92,7 +125,6 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
 
     @Override
     public void initAdapter(List<Lot> lotList) {
-        //Потом тут будет установка не DummyContent, а simpleLotList
         mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(lotList, mListener);
         mRecyclerView.setAdapter(mAuctionListRecyclerViewAdapter);
 
@@ -116,6 +148,9 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentInteraction(Lot item);
+        void onScrollDown();
+        void onScrollUp();
+        void onScrollDownNotToEnd();
     }
 
 

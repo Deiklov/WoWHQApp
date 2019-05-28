@@ -203,7 +203,7 @@ public class SettingRepository implements MainContract.SettingRepository {
 
             @Override
             public void onComplete() {
-                Log.v(WowhqApplication.LOG_TAG, "Удалены все простые лоты");
+                Log.v(WowhqApplication.LOG_TAG, "[УСПЕХ][SettingRepo]Удалены все простые лоты");
             }
 
             @Override

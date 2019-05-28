@@ -565,4 +565,6 @@
     <string name="token_notification_text">Йуху! Токен превзошел ваши ожидания: </string>
     <string name="talents_button_back">Назад</string>
     <string name="token_appbar_title">WoWToken</string>
+    <string name="auctions_load_aucs_btn">Обновить</string>
+    <string name="auctions_connect_error">Ошибка при загрузке данных. \n Возможно, недоступно интернет подключение\n или на сервере ведутся работы.\nЛибо Вы выбрали испанский язык в настройках. \n:)</string>
 </resources>

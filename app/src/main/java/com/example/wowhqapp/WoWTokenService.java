@@ -66,7 +66,12 @@ public class WoWTokenService extends IntentService implements MainContract.WoWTo
             if (action != null && action.equals(ACTION)){
                 //Делаем работу
                 Log.v(WowhqApplication.LOG_TAG, "Запускаем работу в Intent Service, Поток: " + currentThread().getName());
-                mIsSuccess = mWoWTokenServicePresenter.init();
+                //Обработка в presenter?
+                try {
+                    mIsSuccess = mWoWTokenServicePresenter.init();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         }
         sendSuccess();

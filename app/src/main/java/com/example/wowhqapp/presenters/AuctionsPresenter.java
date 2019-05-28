@@ -10,6 +10,7 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
     private Boolean mTypeOfActivity; //False - для аукциона
     private Boolean mIsNetQueryEnable;
     private Boolean mIsRecyclerAdapterEnable;
+    private Boolean mIsAllAuctionsDownload;
     private Integer mCurrentPage;
     private MainContract.AuctionsRepo mAuctionsRepo;
     private MainContract.AuctionsView mAuctionsView;
@@ -18,11 +19,12 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
 
 
     public AuctionsPresenter(MainContract.AuctionsView auctionsView, SettingRepository settingRepository){
-        mCurrentPage = 0;
+        mCurrentPage = 1;
         mAuctionsView = auctionsView;
         mSettingRepository = settingRepository;
         mIsNetQueryEnable = false;
         mIsRecyclerAdapterEnable = false;
+        mIsAllAuctionsDownload = false;
 
     }
 
@@ -31,7 +33,7 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
         mTypeOfActivity = type;
         mAuctionsView.setTitle(mTypeOfActivity ? titles[0] : titles[1] + " - " + mSettingRepository.getSlug());
         mAuctionsView.setFragment(type);
-        mAuctionsRepo = new AuctionsRepo(mSettingRepository.getSlug(), mSettingRepository.getRegion(), mSettingRepository.getLang(), mTypeOfActivity, this);
+        mAuctionsRepo = new AuctionsRepo(mSettingRepository, mTypeOfActivity, this);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
         }
         else {
             mAuctionsView.notifyAuctionsChange();
+            mAuctionsView.hideProgressBar();
         }
 
     }
@@ -55,19 +58,58 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
     public void notifyLittleData() {
         mAuctionsRepo.deleteAllLots();
         mAuctionsRepo.downloadLots(1);
+        if (mIsNetQueryEnable){
+            mAuctionsView.hideProgressBar();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        mAuctionsRepo.destroy();
     }
 
     @Override
     public void onScrollDown() {
         if (mIsNetQueryEnable){
+            mCurrentPage++;
+            if(!mIsAllAuctionsDownload){
+                mAuctionsView.showProgressBar();
+            }
             mAuctionsRepo.downloadLots(mCurrentPage);
         }
     }
 
     @Override
+    public void onScrollDownNotToEnd() {
+        mAuctionsView.hideLoadNewDataBtn();
+    }
+
+    @Override
     public void onScrollUp() {
         if (!mIsNetQueryEnable){
-
+            mAuctionsView.showLoadNewDataBtn();
         }
+    }
+
+    @Override
+    public void onLoadNewDataBtnClick() {
+        mIsNetQueryEnable = true;
+        mAuctionsRepo.deleteAllLots();
+        mAuctionsRepo.resetLots();
+        mAuctionsView.hideLoadNewDataBtn();
+        mAuctionsView.notifyAuctionsChange();
+        mAuctionsView.addProgressBar();
+        mAuctionsView.showProgressBar();
+    }
+
+    @Override
+    public void onGetFirstPageError() {
+        mAuctionsView.showErrorView();
+    }
+
+    @Override
+    public void onAllAuctionsDownload() {
+        mIsAllAuctionsDownload = true;
+        mAuctionsView.hideProgressBar();
     }
 }

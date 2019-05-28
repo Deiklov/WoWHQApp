@@ -75,8 +75,13 @@ public interface MainContract {
         void MenuItemSelected();
         void notifyUpdatedData();
         void notifyLittleData();
+        void onDestroy();
         void onScrollDown();
+        void onScrollDownNotToEnd();
         void onScrollUp();
+        void onLoadNewDataBtnClick();
+        void onGetFirstPageError();
+        void onAllAuctionsDownload();
     }
     interface AuctionsView{
         void closeAuctions();
@@ -85,6 +90,12 @@ public interface MainContract {
         //Туда и в его коллегу передаем список лотов
         void initAdapter(List<Lot> lotList);
         void notifyAuctionsChange();
+        void showLoadNewDataBtn();
+        void hideLoadNewDataBtn();
+        void showErrorView();
+        void addProgressBar();
+        void showProgressBar();
+        void hideProgressBar();
     }
 
     interface AuctionsListFragView{
@@ -94,6 +105,7 @@ public interface MainContract {
 
     interface AuctionsRepo{
         List<Lot> getLots();
+        void resetLots();
         void downloadLots(int page);
         void deleteAllLots();
         void destroy();
