@@ -50,7 +50,7 @@ public class SettingRepository implements MainContract.SettingRepository {
 
     @Override
     public String getSlug() {
-        return mPreferences.getString(SLUG, "uther");
+        return mPreferences.getString(SLUG, "borean-tundra");
     }
 
     @Override

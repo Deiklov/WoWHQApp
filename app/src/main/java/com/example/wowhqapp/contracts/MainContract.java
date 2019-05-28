@@ -1,6 +1,6 @@
 package com.example.wowhqapp.contracts;
 
-import com.example.wowhqapp.databases.entity.SimpleLot;
+import com.example.wowhqapp.databases.entity.Lot;
 
 import java.util.List;
 
@@ -65,6 +65,7 @@ public interface MainContract {
     }
     interface SettingView{
         void SetSpinnerValues(String slug, String region, String lang);
+        void SetSpinnerAdapter(String region);
         void CloseSetting();
     }
 
@@ -82,17 +83,17 @@ public interface MainContract {
         void setTitle(String txt);
         void setFragment(Boolean type);
         //Туда и в его коллегу передаем список лотов
-        void initAdapter(List<SimpleLot> simpleLotList);
+        void initAdapter(List<Lot> lotList);
         void notifyAuctionsChange();
     }
 
     interface AuctionsListFragView{
-        void initAdapter(List<SimpleLot> simpleLotList);
+        void initAdapter(List<Lot> lotList);
         void notifyAuctionsChange();
     }
 
     interface AuctionsRepo{
-        List<SimpleLot> getLots();
+        List<Lot> getLots();
         void downloadLots(int page);
         void deleteAllLots();
         void destroy();

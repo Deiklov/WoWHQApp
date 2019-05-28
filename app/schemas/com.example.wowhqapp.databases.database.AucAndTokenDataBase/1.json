@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e2c7a00761dd9033035ad02d509c3047",
+    "identityHash": "163f76ae46810da04b7a0f86127ad842",
     "entities": [
       {
         "tableName": "WoWToken",
@@ -65,7 +65,7 @@
       },
       {
         "tableName": "SimpleLot",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` TEXT, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` INTEGER, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT, `quantity` INTEGER, `slug` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -88,7 +88,7 @@
           {
             "fieldPath": "pet",
             "columnName": "pet",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -118,6 +118,18 @@
           {
             "fieldPath": "time",
             "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -142,7 +154,7 @@
       },
       {
         "tableName": "BestLot",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` TEXT, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT, `timeOfSearch` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` INTEGER, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT, `quantity` INTEGER, `slug` TEXT, `timeOfSearch` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -165,7 +177,7 @@
           {
             "fieldPath": "pet",
             "columnName": "pet",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -195,6 +207,18 @@
           {
             "fieldPath": "time",
             "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -226,7 +250,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e2c7a00761dd9033035ad02d509c3047\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"163f76ae46810da04b7a0f86127ad842\")"
     ]
   }
 }

@@ -5,11 +5,14 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.squareup.moshi.Json;
 
 @Entity(indices = {@Index("item")})
 public class SimpleLot implements Lot{
 
+    @NonNull
     @PrimaryKey(autoGenerate = true)
     public long id;
     @Json(name = "item")
@@ -17,7 +20,7 @@ public class SimpleLot implements Lot{
     @Json(name = "gameId")
     private Long gameId;
     @Json(name = "pet")
-    private String pet;
+    private Long pet;
     @Json(name = "icon")
     private String icon;
     @Json(name = "bid")
@@ -28,6 +31,10 @@ public class SimpleLot implements Lot{
     private String owner;
     @Json(name = "time:")
     private String time;
+    @Json(name = "quantity")
+    private Long quantity;
+    @Json(name = "slug")
+    private String slug;
 
     /**
      * No args constructor for use in serialization
@@ -46,9 +53,11 @@ public class SimpleLot implements Lot{
      * @param gameId
      * @param item
      * @param owner
+     * @param slug
+     * @param quantity
      * @param bid
      */
-    public SimpleLot(String item, Long gameId, String pet, String icon, Long bid, Long buyout, String owner, String time) {
+    public SimpleLot(@NonNull String item, Long gameId, Long pet, String icon, Long bid, Long buyout, String owner, String time, Long quantity, String slug) {
         super();
         this.item = item;
         this.gameId = gameId;
@@ -58,6 +67,8 @@ public class SimpleLot implements Lot{
         this.buyout = buyout;
         this.owner = owner;
         this.time = time;
+        this.quantity = quantity;
+        this.slug = slug;
     }
 
     public String getItem() {
@@ -76,11 +87,11 @@ public class SimpleLot implements Lot{
         this.gameId = gameId;
     }
 
-    public String  getPet() {
+    public Long getPet() {
         return pet;
     }
 
-    public void setPet(String  pet) {
+    public void setPet(Long pet) {
         this.pet = pet;
     }
 
@@ -122,6 +133,22 @@ public class SimpleLot implements Lot{
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public Long getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Long quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
 }

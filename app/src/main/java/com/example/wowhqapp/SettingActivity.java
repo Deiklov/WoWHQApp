@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.example.wowhqapp.contracts.MainContract;
@@ -83,8 +84,8 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
         mSlugSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String[] choose = getResources().getStringArray(R.array.slugs);
-                mSettingPresenter.onSlugSelect(choose[position]);
+                ArrayAdapter arrayAdapter = (ArrayAdapter) mSlugSpinner.getAdapter();
+                mSettingPresenter.onSlugSelect(String.valueOf(arrayAdapter.getItem(position)));
             }
 
             @Override
@@ -97,8 +98,25 @@ public class SettingActivity extends AppCompatActivity implements MainContract.S
     public void SetSpinnerValues(String slug, String region, String lang) {
 
         mRegionSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.regions)).indexOf(region));
-        mSlugSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.slugs)).indexOf(slug));
+        if (region.equals("eu")){
+            mSlugSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.slugs_eu)).indexOf(slug));
+        }else {
+            mSlugSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.slugs_us)).indexOf(slug));
+        }
         mLangSpinner.setSelection(Arrays.asList(getResources().getStringArray(R.array.langs)).indexOf(lang));
+
+    }
+
+    @Override
+    public void SetSpinnerAdapter(String region) {
+        ArrayAdapter<?> arrayAdapter;
+        if (region.equals("eu")){
+            arrayAdapter = ArrayAdapter.createFromResource(this, R.array.slugs_eu, android.R.layout.simple_spinner_item);
+        }else{
+            arrayAdapter = ArrayAdapter.createFromResource(this, R.array.slugs_us, android.R.layout.simple_spinner_item);
+        }
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSlugSpinner.setAdapter(arrayAdapter);
 
     }
 

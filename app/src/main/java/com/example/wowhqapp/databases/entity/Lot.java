@@ -9,9 +9,9 @@ public interface Lot {
 
     public void setGameId(Long gameId);
 
-    public String  getPet();
+    public Long  getPet();
 
-    public void setPet(String  pet);
+    public void setPet(Long  pet);
 
     public String getIcon();
 
@@ -32,4 +32,12 @@ public interface Lot {
     public String getTime();
 
     public void setTime(String time);
+
+    public String getSlug();
+
+    public void setSlug(String slug);
+
+    public Long getQuantity();
+
+    public void setQuantity(Long quantity);
 }

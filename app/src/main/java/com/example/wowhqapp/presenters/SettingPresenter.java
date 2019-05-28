@@ -15,6 +15,7 @@ public class SettingPresenter implements MainContract.SettingPresenter {
 
     @Override
     public void init() {
+        mSettingView.SetSpinnerAdapter(mSettingRepository.getRegion());
         mSettingView.SetSpinnerValues(mSettingRepository.getSlug(), mSettingRepository.getRegion(), mSettingRepository.getLang());
     }
 

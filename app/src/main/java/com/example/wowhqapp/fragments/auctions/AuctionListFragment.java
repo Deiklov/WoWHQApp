@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.contracts.MainContract;
-import com.example.wowhqapp.databases.entity.SimpleLot;
-import com.example.wowhqapp.fragments.auctions.dummy.DummyContent;
-import com.example.wowhqapp.fragments.auctions.dummy.DummyContent.DummyItem;
+import com.example.wowhqapp.databases.entity.Lot;
 
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
 
     // Тот же setContentView() - только во фрагментах
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_auctionlist_list, container, false);
 
@@ -68,9 +66,6 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
             Context context = view.getContext();
             mRecyclerView = (RecyclerView) view;
             mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(DummyContent.ITEMS, mListener);
-            mRecyclerView.setAdapter(mAuctionListRecyclerViewAdapter);
-            //recyclerView.setAdapter(new AuctionListRecyclerViewAdapter(DummyContent.ITEMS, mListener));
             mRecyclerView.addOnScrollListener(mOnScrollListener);
         }
         return view;
@@ -96,9 +91,9 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     }
 
     @Override
-    public void initAdapter(List<SimpleLot> simpleLotList) {
+    public void initAdapter(List<Lot> lotList) {
         //Потом тут будет установка не DummyContent, а simpleLotList
-        mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(DummyContent.ITEMS, mListener);
+        mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(lotList, mListener);
         mRecyclerView.setAdapter(mAuctionListRecyclerViewAdapter);
 
     }
@@ -106,7 +101,6 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     @Override
     public void notifyAuctionsChange() {
         mAuctionListRecyclerViewAdapter.notifyDataSetChanged();
-
     }
 
     /**
@@ -121,7 +115,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Lot item);
     }
 
 

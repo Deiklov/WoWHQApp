@@ -12,9 +12,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.wowhqapp.contracts.MainContract;
-import com.example.wowhqapp.databases.entity.SimpleLot;
+import com.example.wowhqapp.databases.entity.Lot;
 import com.example.wowhqapp.fragments.auctions.AuctionListFragment;
-import com.example.wowhqapp.fragments.auctions.dummy.DummyContent;
 import com.example.wowhqapp.presenters.AuctionsPresenter;
 import com.example.wowhqapp.repositories.SettingRepository;
 
@@ -84,8 +83,8 @@ public class AuctionAndDealsActivity extends AppCompatActivity implements MainCo
         }
 
     @Override
-    public void initAdapter(List<SimpleLot> simpleLotList) {
-        mAuctionsFragment.initAdapter(simpleLotList);
+    public void initAdapter(List<Lot> lotList) {
+        mAuctionsFragment.initAdapter(lotList);
 
     }
 
@@ -96,7 +95,7 @@ public class AuctionAndDealsActivity extends AppCompatActivity implements MainCo
 
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Lot lot) {
         Log.v(WowhqApplication.LOG_TAG, "onListFragmentInteraction - это обработчик нажатия на элемент списка (Лот), AuctionAndDeals Activity");
     }
 }

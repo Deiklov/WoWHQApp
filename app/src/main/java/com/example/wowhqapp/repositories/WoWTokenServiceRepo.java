@@ -39,6 +39,7 @@ public class WoWTokenServiceRepo implements MainContract.TokenServiceRepository 
 //        Log.v(WowhqApplication.LOG_TAG, "saveWoWTokenAndGetCurrentPrice");
         try {
              woWToken = AucAndTokenNetwork.getInstance().getWoWTokenAPI().getWoWTokenByRegion(mRegion).execute().body();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
