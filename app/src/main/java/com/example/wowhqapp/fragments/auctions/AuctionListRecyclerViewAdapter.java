@@ -1,5 +1,6 @@
 package com.example.wowhqapp.fragments.auctions;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.wowhqapp.R;
 import com.example.wowhqapp.databases.entity.Lot;
 import com.example.wowhqapp.fragments.auctions.AuctionListFragment.OnListFragmentInteractionListener;
@@ -24,10 +27,12 @@ public class AuctionListRecyclerViewAdapter extends RecyclerView.Adapter<Auction
 
     private final List<Lot> mLots;
     private final OnListFragmentInteractionListener mListener;
+    private final Context mContext; //Пока сохраняем context, но дальшоое можно поменять
 
-    public AuctionListRecyclerViewAdapter(List<Lot> lots, OnListFragmentInteractionListener listener) {
+    public AuctionListRecyclerViewAdapter(List<Lot> lots, Context context) {
         mLots = lots;
-        mListener = listener;
+        mListener = (OnListFragmentInteractionListener)context;
+        mContext = (Context) context;
     }
 
     @Override
@@ -48,6 +53,14 @@ public class AuctionListRecyclerViewAdapter extends RecyclerView.Adapter<Auction
         holder.mBuyoutTextView.setText(String.valueOf(mLots.get(position).getBuyout()));
         holder.mNameTextView.setText(mLots.get(position).getItem() );
 
+
+        Glide.with(mContext)
+                .load(mListener.onGlideGetUrl(holder.mLot.getIcon()))
+                .placeholder(R.drawable.question_mark_56)
+                .timeout(3000)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.mIconImageView);
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +71,7 @@ public class AuctionListRecyclerViewAdapter extends RecyclerView.Adapter<Auction
                 }
             }
         });
+
     }
 
     @Override

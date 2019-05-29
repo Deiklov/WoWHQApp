@@ -82,6 +82,7 @@ public interface MainContract {
         void onLoadNewDataBtnClick();
         void onGetFirstPageError();
         void onAllAuctionsDownload();
+        String onGetGlideUrl(String icon_name); //Вообще не правильно так делать
     }
     interface AuctionsView{
         void closeAuctions();

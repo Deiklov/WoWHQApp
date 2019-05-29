@@ -38,7 +38,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     private Date mLastScrollDownDate;
     private Date mLastScrollDownNotToEnd;
     private Date mLastScrollUpDate;
-
+    private Context mContext;
 
 
     /**
@@ -111,6 +111,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
         mLastScrollDownNotToEnd = mLastScrollDownDate = mLastScrollUpDate = new Date();
         if (context instanceof OnListFragmentInteractionListener) {
             mListener = (OnListFragmentInteractionListener) context;
+            mContext = (Context) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");
@@ -121,11 +122,12 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mContext = null;
     }
 
     @Override
     public void initAdapter(List<Lot> lotList) {
-        mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(lotList, mListener);
+        mAuctionListRecyclerViewAdapter = new AuctionListRecyclerViewAdapter(lotList, mContext);
         mRecyclerView.setAdapter(mAuctionListRecyclerViewAdapter);
 
     }
@@ -151,6 +153,7 @@ public class AuctionListFragment extends Fragment implements MainContract.Auctio
         void onScrollDown();
         void onScrollUp();
         void onScrollDownNotToEnd();
+        String onGlideGetUrl(String icon_name);
     }
 
 

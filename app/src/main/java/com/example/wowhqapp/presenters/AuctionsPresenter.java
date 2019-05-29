@@ -112,4 +112,9 @@ public class AuctionsPresenter implements MainContract.AuctionsPresenter {
         mIsAllAuctionsDownload = true;
         mAuctionsView.hideProgressBar();
     }
+
+    @Override
+    public String onGetGlideUrl(String icon_name) {
+        return "http://media.blizzard.com/wow/icons/56/" + icon_name + ".jpg";
+    }
 }

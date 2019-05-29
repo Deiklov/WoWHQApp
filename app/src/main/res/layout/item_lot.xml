@@ -24,7 +24,7 @@
         <!--https://stackoverflow.com/questions/31675420/set-round-corner-image-in-imageview-->
         <ImageView
             android:id="@+id/lot_icon"
-            android:src="@drawable/inv_crate_03"
+            android:src="@drawable/question_mark_56"
             android:background="@drawable/icon_border"
             android:layout_width="72dp"
             android:layout_height="72dp"

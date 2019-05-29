@@ -192,6 +192,11 @@ public class AuctionAndDealsActivity extends AppCompatActivity implements MainCo
         mAuctionsPresenter.onScrollDownNotToEnd();
     }
 
+    @Override
+    public String onGlideGetUrl(String icon_name) {
+        return mAuctionsPresenter.onGetGlideUrl(icon_name);
+    }
+
 
     @Override
     public void onListFragmentInteraction(Lot lot) {
