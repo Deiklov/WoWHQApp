@@ -48,7 +48,7 @@ public class AuctionListRecyclerViewAdapter extends RecyclerView.Adapter<Auction
         holder.mOwnerTextView.setText(mLots.get(position).getOwner());
         holder.mSlugTextView.setText(mLots.get(position).getSlug() );
         holder.mTimeTextView.setText(mLots.get(position).getTime() );
-        holder.mQuantityTextView.setText(String.valueOf(mLots.get(position).getQuantity()));
+        holder.mQuantityTextView.setText("x"+String.valueOf(mLots.get(position).getQuantity()));
         holder.mBidTextView.setText(String.valueOf(mLots.get(position).getBid()));
         holder.mBuyoutTextView.setText(String.valueOf(mLots.get(position).getBuyout()));
         holder.mNameTextView.setText(mLots.get(position).getItem() );
