@@ -11,7 +11,7 @@ import com.example.wowhqapp.databases.entity.BestLot;
 import com.example.wowhqapp.databases.entity.SimpleLot;
 import com.example.wowhqapp.databases.entity.WoWToken;
 
-@Database(entities = {WoWToken.class, SimpleLot.class, BestLot.class}, version = 1)
+@Database(entities = {WoWToken.class, SimpleLot.class, BestLot.class}, version = 2)
 public abstract class AucAndTokenDataBase extends RoomDatabase {
 
     public abstract WoWTokenDao getWoWTokenDao();

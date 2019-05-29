@@ -20,7 +20,6 @@
     <string-array name="langs">
         <item>ru</item>
         <item>en</item>
-        <item>es</item>
         <item>de</item>
         <item>fr</item>
     </string-array>
