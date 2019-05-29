@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c490a0fd229f4c5446e3dc214c27a639",
+    "identityHash": "163f76ae46810da04b7a0f86127ad842",
     "entities": [
       {
         "tableName": "WoWToken",
@@ -64,8 +64,8 @@
         "foreignKeys": []
       },
       {
-        "tableName": "Lot",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` TEXT, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT)",
+        "tableName": "SimpleLot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` INTEGER, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT, `quantity` INTEGER, `slug` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -88,7 +88,7 @@
           {
             "fieldPath": "pet",
             "columnName": "pet",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": false
           },
           {
@@ -120,6 +120,18 @@
             "columnName": "time",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -130,12 +142,107 @@
         },
         "indices": [
           {
-            "name": "index_Lot_item",
+            "name": "index_SimpleLot_item",
             "unique": false,
             "columnNames": [
               "item"
             ],
-            "createSql": "CREATE  INDEX `index_Lot_item` ON `${TABLE_NAME}` (`item`)"
+            "createSql": "CREATE  INDEX `index_SimpleLot_item` ON `${TABLE_NAME}` (`item`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "BestLot",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `item` TEXT, `gameId` INTEGER, `pet` INTEGER, `icon` TEXT, `bid` INTEGER, `buyout` INTEGER, `owner` TEXT, `time` TEXT, `quantity` INTEGER, `slug` TEXT, `timeOfSearch` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "item",
+            "columnName": "item",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "gameId",
+            "columnName": "gameId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "pet",
+            "columnName": "pet",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "icon",
+            "columnName": "icon",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bid",
+            "columnName": "bid",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "buyout",
+            "columnName": "buyout",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "owner",
+            "columnName": "owner",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "time",
+            "columnName": "time",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "quantity",
+            "columnName": "quantity",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "slug",
+            "columnName": "slug",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "timeOfSearch",
+            "columnName": "timeOfSearch",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_BestLot_item",
+            "unique": false,
+            "columnNames": [
+              "item"
+            ],
+            "createSql": "CREATE  INDEX `index_BestLot_item` ON `${TABLE_NAME}` (`item`)"
           }
         ],
         "foreignKeys": []
@@ -143,7 +250,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c490a0fd229f4c5446e3dc214c27a639\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"163f76ae46810da04b7a0f86127ad842\")"
     ]
   }
 }

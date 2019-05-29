@@ -7,29 +7,29 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.wowhqapp.databases.entity.SimpleLot;
+import com.example.wowhqapp.databases.entity.BestLot;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 
 @Dao
-public interface AuctionsDao {
-    @Query("SELECT * FROM SimpleLot ")
-    Flowable<List<SimpleLot>> getAll();
+public interface BestLotsDao {
+    @Query("SELECT * FROM BestLot ")
+    Flowable<List<BestLot>> getAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(SimpleLot simpleLot);
+    void insert(BestLot simpleLot);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertList(List<SimpleLot> simpleLots);
+    void insertList(List<BestLot> simpleLots);
 
     @Update
-    void update(SimpleLot simpleLot);
+    void update(BestLot simpleLot);
 
     @Delete
-    void delete(SimpleLot simpleLot);
+    void delete(BestLot simpleLot);
 
-    @Query("DELETE FROM SimpleLot")
+    @Query("DELETE FROM BestLot")
     void deleteAll();
 }

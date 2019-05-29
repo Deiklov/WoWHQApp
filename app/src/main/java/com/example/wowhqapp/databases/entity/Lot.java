@@ -1,129 +1,43 @@
 package com.example.wowhqapp.databases.entity;
 
+public interface Lot {
+    public String getItem();
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import com.squareup.moshi.Json;
+    public void setItem(String item);
 
-@Entity(indices = {@Index("item")})
-public class Lot {
+    public Long getGameId();
 
-    @PrimaryKey(autoGenerate = true)
-    public long id;
-    @Json(name = "item")
-    private String item;
-    @Json(name = "gameId")
-    private Long gameId;
-    @Json(name = "pet")
-    private String pet;
-    @Json(name = "icon")
-    private String icon;
-    @Json(name = "bid")
-    private Long bid;
-    @Json(name = "buyout")
-    private Long buyout;
-    @Json(name = "owner")
-    private String owner;
-    @Json(name = "time:")
-    private String time;
+    public void setGameId(Long gameId);
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
-    @Ignore
-    public Lot() {
-    }
+    public Long  getPet();
 
-    /**
-     *
-     * @param icon
-     * @param time
-     * @param buyout
-     * @param pet
-     * @param gameId
-     * @param item
-     * @param owner
-     * @param bid
-     */
-    public Lot(String item, Long gameId, String pet, String icon, Long bid, Long buyout, String owner, String time) {
-        super();
-        this.item = item;
-        this.gameId = gameId;
-        this.pet = pet;
-        this.icon = icon;
-        this.bid = bid;
-        this.buyout = buyout;
-        this.owner = owner;
-        this.time = time;
-    }
+    public void setPet(Long  pet);
 
-    public String getItem() {
-        return item;
-    }
+    public String getIcon();
 
-    public void setItem(String item) {
-        this.item = item;
-    }
+    public void setIcon(String icon);
 
-    public Long getGameId() {
-        return gameId;
-    }
+    public Long getBid();
 
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
-    }
+    public void setBid(Long bid);
 
-    public String  getPet() {
-        return pet;
-    }
+    public Long getBuyout();
 
-    public void setPet(String  pet) {
-        this.pet = pet;
-    }
+    public void setBuyout(Long buyout);
 
-    public String getIcon() {
-        return icon;
-    }
+    public String getOwner();
 
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
+    public void setOwner(String owner);
 
-    public Long getBid() {
-        return bid;
-    }
+    public String getTime();
 
-    public void setBid(Long bid) {
-        this.bid = bid;
-    }
+    public void setTime(String time);
 
-    public Long getBuyout() {
-        return buyout;
-    }
+    public String getSlug();
 
-    public void setBuyout(Long buyout) {
-        this.buyout = buyout;
-    }
+    public void setSlug(String slug);
 
-    public String getOwner() {
-        return owner;
-    }
+    public Long getQuantity();
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
+    public void setQuantity(Long quantity);
 }
-
-

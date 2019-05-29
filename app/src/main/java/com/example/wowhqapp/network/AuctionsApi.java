@@ -8,7 +8,8 @@ import retrofit2.http.Path;
 
 public interface AuctionsApi {
     @GET("allauc/{slug}/{region}/{lang}/{page}")
-    public Call<Auctions> getAutionsByPage(@Path("region") String region,
-                                           @Path("slug") String slug,
-                                           @Path("page") String page);
+    Call<Auctions> getAuctionsByPage(@Path("slug") String slug,
+                                            @Path("region") String region,
+                                            @Path("lang") String lang,
+                                            @Path("page") String page);
 }

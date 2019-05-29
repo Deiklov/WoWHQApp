@@ -24,7 +24,7 @@
             android:layout_centerInParent ="true"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:entries="@array/slugs">
+            android:entries="@array/slugs_eu">
         </Spinner>
         <TextView
             android:text="@string/setting_region"

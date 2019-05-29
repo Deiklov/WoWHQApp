@@ -1,12 +1,15 @@
 package com.example.wowhqapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -27,6 +30,8 @@ import com.example.wowhqapp.repositories.SettingRepository;
 
 public class WowTokenActivity extends AppCompatActivity implements MainContract.WoWTokenView, ViewSwitcher.ViewFactory {
 
+    private Toolbar mToolbar;
+    private TextView mToolbarTitle;
     private CheckBox mCheckBox;
     private TextView mCurrentText;
     private TextView mMinText;
@@ -69,6 +74,7 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
 
         mWoWTokenPresenter = new WoWTokenPresenter(new SettingRepository(getSharedPreferences(SettingRepository.APP_PREFERENCES, Context.MODE_PRIVATE)), this);
 
+        mToolbar = (Toolbar) findViewById(R.id.token_toolbar);
         mCheckBox = (CheckBox) findViewById(R.id.token_start);
         mCurrentText = (TextView) findViewById(R.id.token_current);
         mMaxText = (TextView) findViewById(R.id.token_max);
@@ -87,7 +93,11 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
         mArrowSwitcher.setInAnimation(inAnimation);
         mArrowSwitcher.setOutAnimation(outAnimation);
 
-        mWoWTokenPresenter.initTargetPriceAndStartService();
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.token_a_bar);
+
+        mWoWTokenPresenter.initTargetPriceAndStartJob();
 
 
         final Handler handler = new Handler();
@@ -161,18 +171,11 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
     }
 
     @Override
-    public void startService() {
-        Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
-        intent.putExtra(WoWTokenService.IS_FROM_ACTIVITY, true);
-        startService(intent);
-
+    public void startJob() {
+        Util.scheduleWoWTokenJob(getApplicationContext(), 1);
     }
 
-    @Override
-    public void stopService() {
-        Intent intent = new Intent(getApplicationContext(), WoWTokenService.class);
-        stopService(intent);
-    }
+
 
     @Override
     public void setPrice(long min, long max, long current, long lastChange, int icon) {
@@ -211,5 +214,40 @@ public class WowTokenActivity extends AppCompatActivity implements MainContract.
                 ImageSwitcher.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
         return imageView;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //По факту уже не нужно
+        mWoWTokenPresenter.onStop();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        //Т.к. если активити уйдет с переднего плана и нам ненужны уведомления, то и задачу скана ставить не нужно.
+        //А вот если мы вернем активити на передний план, то нужно возобновить работу сканера, так, что нужно сделать init (по сути в нем нужен только старт сервиса)
+        //Так что либо из onCreate удалить этот вызов, либо тут делать только старт сканера.
+        mWoWTokenPresenter.initTargetPriceAndStartJob();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        mWoWTokenPresenter.onMenuItemSelected();
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.setting_menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public void closeWoWToken() {
+        this.finish();
     }
 }

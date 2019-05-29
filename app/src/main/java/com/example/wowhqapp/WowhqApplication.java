@@ -22,7 +22,7 @@ public class WowhqApplication extends Application {
         super.onCreate();
         instance = this;
         mAucAndTokenDataBase = Room.databaseBuilder(this, AucAndTokenDataBase.class, "AucAndTokenDB")
-                .allowMainThreadQueries() //Пока будет так
+                //.allowMainThreadQueries() //Пока будет так
                 .fallbackToDestructiveMigration()
                 .build();
         // mApiRepo = new ApiRepo();
